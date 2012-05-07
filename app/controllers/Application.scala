@@ -2,8 +2,9 @@ package controllers
 
 import play.api._
 import libs.iteratee.{PushEnumerator, Enumerator, Iteratee}
-import libs.json.JsValue
+import libs.json.{JsValue}
 import play.api.mvc._
+import com.codahale.jerkson.Json
 
 object Application extends Controller {
 
@@ -16,15 +17,16 @@ object Application extends Controller {
     implicit request =>
       username.filterNot(_.isEmpty).map {
         username =>
+          val welcomeText: (String,List[String]) = GameController.checkIfGameAvailable(username)
+          if (welcomeText != ("",null)) {
 
-          if (GameController.checkIfGameAvailable(username)) {
-
-            Ok(views.html.battleRoom(username))
+            Ok(views.html.battleRoom(username,welcomeText))
 
           } else {
             Redirect(routes.Application.index).flashing(
               "error" -> "Battle is full");
           }
+
       }.getOrElse {
         Redirect(routes.Application.index).flashing(
           "error" -> "Please choose a valid username."
@@ -33,17 +35,16 @@ object Application extends Controller {
   }
 
 
-  def connect(username: String) = WebSocket.using[String] {
+  def connect(username: String) = WebSocket.using[JsValue] {
     request =>
 
-      val out: PushEnumerator[String] = Enumerator.imperative[String]()
-      println("adding player" + username + "asddas")
-      GameController.addPlayer(username, out)
-      val in = Iteratee.foreach[String] {
-        s => println(s)
-        GameController.parse(username, s)
+      val out: PushEnumerator[JsValue] = Enumerator.imperative[JsValue]()
+
+      val in = Iteratee.foreach[JsValue] {
+        json => GameController.parse(username, json)
       }
 
+      GameController.addPlayer(username, out)
       (in, out)
   }
 
