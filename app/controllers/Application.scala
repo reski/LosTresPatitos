@@ -1,41 +1,50 @@
 package controllers
 
 import play.api._
+import libs.iteratee.{PushEnumerator, Enumerator, Iteratee}
 import libs.json.JsValue
 import play.api.mvc._
 
-
 object Application extends Controller {
-  
-  def index = Action { implicit request =>
-    Ok(views.html.index())
+
+  def index = Action {
+    implicit request =>
+      Ok(views.html.index())
   }
 
-  /**
-   * Display the main page.
-   */
+  def battleRoom(username: Option[String]) = Action {
+    implicit request =>
+      username.filterNot(_.isEmpty).map {
+        username =>
 
-  def lobby(username: Option[String]) = Action { implicit request =>
-    username.filterNot(_.isEmpty).map { username =>
-      Ok(views.html.battleship(username))
-    }.getOrElse {
-      Redirect(routes.Application.index).flashing(
-        "error" -> "Please choose a valid username."
-      )
-    }
+          if (GameController.checkIfGameAvailable(username)) {
+
+            Ok(views.html.battleRoom(username))
+
+          } else {
+            Redirect(routes.Application.index).flashing(
+              "error" -> "Battle is full");
+          }
+      }.getOrElse {
+        Redirect(routes.Application.index).flashing(
+          "error" -> "Please choose a valid username."
+        )
+      }
   }
 
-  /**
-   * Handles the chat websocket.
-   */
 
- /* def chat(username: String) = WebSocket.async[JsValue] { request  =>
+  def connect(username: String) = WebSocket.using[String] {
+    request =>
 
-    ChatRoom.join(username)
+      val out: PushEnumerator[String] = Enumerator.imperative[String]()
+      println("adding player" + username + "asddas")
+      GameController.addPlayer(username, out)
+      val in = Iteratee.foreach[String] {
+        s => println(s)
+        GameController.parse(username, s)
+      }
 
-  }*/
-
-
-
+      (in, out)
+  }
 
 }
