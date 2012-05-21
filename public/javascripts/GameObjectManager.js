@@ -151,6 +151,9 @@ function GameObjectManager()
                     {name: 'ship3bad', src: '/assets/images/ship3bad.png'},
                     {name: 'ship4bad', src: '/assets/images/ship4bad.png'},
                     {name: 'grid', src: '/assets/images/grid.png'},
+                    {name: 'hit', src: '/assets/images/hit.png'},
+                    {name: 'missed', src: '/assets/images/missed.png'},
+                    {name: 'sunk', src: '/assets/images/sunk.png'},
 
 
 

@@ -1,13 +1,12 @@
 package models
 
-case class Tile(var ship: Ship) {
+case class Tile(var ship: Option[Ship]) {
    var alreadyFired: Boolean = false
 }
 
 object Tile{
    def emptyTile(): Tile ={
-     Tile(null)
+     Tile(None)
    }
-
 
 }

@@ -4,9 +4,12 @@ case class Ship(id: Long, size: Int) {
 
   var hitPoints: Int = size;
 
-  def hit : ShootResult.Value = {
-    hitPoints = hitPoints - 1
-    if (hitPoints <= 0) ShootResult.SunkShip
+  def hit(board: Board) : ShootResult.Value = {
+    hitPoints-=1
+    if (hitPoints <= 0) {
+      board.boatsLeft-=1
+      ShootResult.SunkShip
+    }
     else ShootResult.HitShip
   }
 }

@@ -39,11 +39,7 @@ object Application extends Controller {
     request =>
 
       val out: PushEnumerator[JsValue] = Enumerator.imperative[JsValue]()
-
-      val in = Iteratee.foreach[JsValue] {
-        json => GameController.parse(username, json)
-      }
-
+      val in = Iteratee.foreach[JsValue] { json => GameController.parse(username, json)}
       GameController.addPlayer(username, out)
       (in, out)
   }

@@ -33,9 +33,9 @@ function ApplicationManager()
         g_GameObjectManager.shutdownAll();
 
 
-        this.backgroundOponent = new AnimatedGameObject().startupAnimatedGameObject(g_ResourceManager.water, 0, 0, 0,10,15);
-        this.grid = new VisualGameObject().startupVisualGameObject(g_ResourceManager.grid, 0, 0, 1);
-        this.backgroundPlayer = new AnimatedGameObject().startupAnimatedGameObject(g_ResourceManager.water, 410, 0, 0,10,15);
+        this.backgroundOponent = new AnimatedGameObject().startupAnimatedGameObject(g_ResourceManager.water, 0, 20, 0,10,15);
+        this.grid = new VisualGameObject().startupVisualGameObject(g_ResourceManager.grid, 0, 20, 1);
+        this.backgroundPlayer = new AnimatedGameObject().startupAnimatedGameObject(g_ResourceManager.water, 410, 20, 0,10,15);
 
 
         this.level = new Level().startupLevel(this.canvasWidth, this.canvasHeight);
@@ -44,6 +44,7 @@ function ApplicationManager()
 
 
     }
+
 
     this.openMainMenu = function(){
         g_GameObjectManager.shutdownAll();
@@ -56,15 +57,16 @@ function ApplicationManager()
     this.parseShot = function(x,y){
 
        var posx = Math.floor(x/40);
-       var posy = Math.floor(y/40);
-
+       var posy = Math.floor((y-20)/40);
+       if((0 <= posx)&&(posx <=9)&&(posy <=9)&&(0 <=posy)){
+    //   alert('x:'+ posx + 'y '+posy)
        g_Socket.send(JSON.stringify({
                         text: "",
                         cordx : posx,
                         cordy : posy
                         }
                           ));
-
+      }
     }
     this.mouseDown = function(event){
          var x, y;

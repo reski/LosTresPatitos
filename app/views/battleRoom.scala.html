@@ -72,7 +72,11 @@
 
     // Create the message element
     var el = $('<div class="message"><span></span><p></p></div>');
+    if(data.user) {
     $("span", el).text(data.user);
+    }else{
+    $("span", el).text("BattleLord");
+    }
     $("p", el).text(data.message);
     $(el).addClass(data);
     if(data.user == '@username') $(el).addClass('me')
@@ -85,6 +89,19 @@
                             $("#members").append('<li>' + this + '</li>')
                                                 })
                     }
+
+    if(data.shotResult){
+            var shotResult = data.shotResult;
+            var posx = data.shotpos.posx;
+            var posy = data.shotpos.posy;
+            g_ApplicationManager.level.paintShot(shotResult,posx,posy,data.gettingShot);
+                        }
+    if(data.finishedGame){
+    g_ApplicationManager.openMainMenu();
+
+    }
+
+
     }
 
 

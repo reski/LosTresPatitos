@@ -1,63 +1,59 @@
 package models
 
-case class Board(var tiles: Array[Array[Tile]]){
+case class Board(var tiles: Array[Array[Tile]]) {
 
+  var boatsLeft:Int = 0
 
-  def shoot(x:Int, y:Int): ShootResult.Value = {
-    val tile: Tile = tiles{x}{y}
-    if (!tile.alreadyFired){
+  def shoot(x: Int, y: Int): ShootResult.Value = {
+    val tile: Tile = tiles(x)(y)
+    println("board shoot tile: " + tile.toString)
+    if (!tile.alreadyFired) {
       tile.alreadyFired = true
-      //si el tile tiene un ship, le pega, si no agua
-      if (tile.ship!=Nil) tile.ship.hit else ShootResult.Missed
-      //tile.ship.map{ship=> ship.hit}.getOrElse{ShootResult.Missed}
-
-    }else{
+      tile.ship.map{ship=> ship.hit(this)}.getOrElse{ShootResult.Missed}
+    } else {
       ShootResult.AlreadyFired
     }
   }
 }
 
-object Board{
+object Board {
 
-  def defaultBoard() : Board = {
-     val ship1 : Ship = Ship.smallShip()
-     val ship2 : Ship = Ship.mediumShip()
-     val ship3 : Ship = Ship.largeShip()
-     val ship4 : Ship = Ship.xLargeShip()
-     val board = Board.emptyBoard()
-     board.tiles{0}{4} = Tile(ship1)
-     board.tiles{1}{1} = Tile(ship2)
-     board.tiles{1}{2} = Tile(ship2)
-     board.tiles{4}{8} = Tile(ship3)
-     board.tiles{5}{8} = Tile(ship3)
-     board.tiles{6}{8} = Tile(ship3)
-     board.tiles{6}{1} = Tile(ship4)
-     board.tiles{6}{2} = Tile(ship4)
-     board.tiles{6}{3} = Tile(ship4)
-     board.tiles{6}{4} = Tile(ship4)
-     board.tiles{5}{4} = Tile(ship4)
+  def defaultBoard(): Board = {
 
-  board
+    val ship1: Ship = Ship.smallShip()
+    val ship1b: Ship = Ship.smallShip()
+    val ship2: Ship = Ship.mediumShip()
+    val ship3: Ship = Ship.largeShip()
+    val ship3b: Ship = Ship.largeShip()
+    val ship4: Ship = Ship.xLargeShip()
+    var board: Board = Board.emptyBoard()
+    board.tiles(0)(8) = Tile(Some(ship1))
+    board.tiles(1)(5) = Tile(Some(ship1b))
+    board.tiles(3)(4) = Tile(Some(ship2))
+    board.tiles(3)(5) = Tile(Some(ship2))
+    board.tiles(0)(0) = Tile(Some(ship3b))
+    board.tiles(1)(0) = Tile(Some(ship3b))
+    board.tiles(2)(0) = Tile(Some(ship3b))
+    board.tiles(3)(8) = Tile(Some(ship3))
+    board.tiles(4)(8) = Tile(Some(ship3))
+    board.tiles(5)(8) = Tile(Some(ship3))
+    board.tiles(7)(7) = Tile(Some(ship4))
+    board.tiles(8)(7) = Tile(Some(ship4))
+    board.tiles(9)(7) = Tile(Some(ship4))
+    board.tiles(9)(6) = Tile(Some(ship4))
+    board.boatsLeft= 2
+    board
   }
 
-  def emptyBoard() :Board ={
-   var board: Board = Board(Array.ofDim[Tile](10,10))
-   //board.tiles.map(array=> array.map(tile => tile =Tile.emptyTile()))
-    for (i <- 0 until 9) {
-      for (j <- 0 until 9) {
-        board.tiles{i}{j} = Tile.emptyTile();
-      }
+  def emptyBoard(): Board = {
+    val a = Array.fill[Tile](10, 10) {
+      Tile.emptyTile()
     }
-   board
+    Board(a)
   }
 }
 
 
-
-  /*def createBoard: List[List[Tile]] = {
-    var lists: List[List[Tile]] = List[List[Tile]]()
-
-  }*/
 
 
 
