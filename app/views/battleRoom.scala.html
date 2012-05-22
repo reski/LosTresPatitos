@@ -60,18 +60,18 @@
     new Main().init(chatSocket);
 
     var sendMessage = function() {
-    chatSocket.send(JSON.stringify(
-    {text: $("#talk").val(),
-    cordx: -1,
-    cordy: -1 }
-    ));
-    $("#talk").val('');
-    }
+                 chatSocket.send(JSON.stringify(
+                    {text: $("#talk").val(),
+                     cordx: -1,
+                     cordy: -1 }
+                   ));
+                 $("#talk").val('');
+                 }
 
     var receiveEvent = function(event) {
     var data = JSON.parse(event.data);
     // Handle errors
-    if(data.error) {
+  if(data.error) {
     chatSocket.close()
     $("#onError span").text(data.error)
     $("#onError").show()
@@ -99,13 +99,15 @@
     }
 
     if(data.shotResult){
-    var shotResult = data.shotResult;
-    var posx = data.shotpos.posx;
-    var posy = data.shotpos.posy;
-    g_ApplicationManager.level.paintShot(shotResult,posx,posy,data.gettingShot);
-    }
+            var shotResult = data.shotResult;
+            var posx = data.shotpos.posx;
+            var posy = data.shotpos.posy;
+            g_ApplicationManager.level.paintShot(shotResult,posx,posy,data.gettingShot);
+                        }
+
+
     if(data.finishedGame){
-    g_ApplicationManager.openMainMenu();
+    g_ApplicationManager.openEnd(data.finishedGame);
 
     }
 
@@ -123,8 +125,6 @@
     $("#talk").keypress(handleReturnKey)
 
     chatSocket.onmessage = receiveEvent;
-
-
 
     })
 
@@ -148,6 +148,8 @@
 <script src="@routes.Assets.at("javascripts/Main.js")" type="text/javascript"></script>
 <!--<script src="@routes.Assets.at("javascripts/prototype-1.6.0.3.js")" type="text/javascript"></script>-->
 <script src="@routes.Assets.at("javascripts/Utils.js")" type="text/javascript"></script>
+<script src="@routes.Assets.at("javascripts/EndScreen.js")" type="text/javascript"></script>
+
 
 
 }

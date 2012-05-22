@@ -28,7 +28,13 @@ class Game {
 
   }
 
-  def shoot(username: String, x: Int, y: Int):ShootResult.Value= { players(username).board.shoot(x,y)}
+  def shoot(username: String, x: Int, y: Int):ShootResult.Value= {
+    if(username.equals(player1)) {
+      players(player2).board.shoot(x,y)
+    }else{
+     players(player1).board.shoot(x,y)
+    }
+  }
 
   def chat(name :String,text: String) ={
     val json: JsValue = createJson(text, name)

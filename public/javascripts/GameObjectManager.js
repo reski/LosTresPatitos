@@ -110,7 +110,7 @@ function GameObjectManager()
         this.canvas = document.getElementById('canvas');
 
         this.canvas.onmousedown = function(event){
-              g_ApplicationManager.mouseDown(event);
+              g_ApplicationManager.level.mouseDown(event);
 
         }
 
@@ -154,6 +154,8 @@ function GameObjectManager()
                     {name: 'hit', src: '/assets/images/hit.png'},
                     {name: 'missed', src: '/assets/images/missed.png'},
                     {name: 'sunk', src: '/assets/images/sunk.png'},
+                    {name: 'YouLose', src: '/assets/images/YouLose.jpg'},
+                    {name: 'YouWin', src: '/assets/images/YouWin.png'},
 
 
 

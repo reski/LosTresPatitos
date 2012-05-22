@@ -68,50 +68,29 @@ function Level()
                     coordinatesArray[i+2]);
         }
     }
+    this.parseShot = function(x,y){
 
-    /*    this.addPowerups = function(canvasWidth, canvasHeight)
-     {
-     for (var x = 0; x < this.blocks.length; ++x)
-     {
-     if (this.powerups[x])
-     {
-     var xPosition = x * this.blockWidth + this.blockWidth / 2;
-     var yPosition = canvasHeight - this.groundHeight(x);
+          var posx = Math.floor(x/40);
+          var posy = Math.floor((y-20)/40);
+          if((0 <= posx)&&(posx <=9)&&(posy <=9)&&(0 <=posy)){
+       //   alert('x:'+ posx + 'y '+posy)
+          g_Socket.send(JSON.stringify({
+                           text: "",
+                           cordx : posx,
+                           cordy : posy
+                           }
+                             ));
+         }
+       }
+       this.mouseDown = function(event){
+            var x, y;
 
-     switch (this.powerups[x])
-     {
-     case 'Gem':
-     new Powerup().startupPowerup(10, g_ResourceManager.gem,
-     xPosition - g_ResourceManager.gem.width / 2,
-     yPosition - g_ResourceManager.gem.height, 4, 1, 1);
-     break;
-     case 'LevelEndPost':
-     new LevelEndPost().startupLevelEndPost(g_ResourceManager.portal,
-     xPosition - g_ResourceManager.portal.width / 2 / 4,
-     yPosition - g_ResourceManager.portal.height, 4);
-     break;
-     }
-     }
-     }
-     }*/
+            canoffset = $("canvas").offset();
+            x = event.clientX + document.body.scrollLeft + document.documentElement.scrollLeft - Math.floor(canoffset.left);
+            y = event.clientY + document.body.scrollTop + document.documentElement.scrollTop - Math.floor(canoffset.top) + 1;
 
-    /**
-     @return     The block under the specified x position
-     @param x    The x position to test
-     */
-    this.currentBlock = function(x)
-    {
-        return parseInt(x / this.blockWidth);
-    }
+          this.parseShot(x,y);
+        }
 
-    /**
-     @return             The hieght of the ground under the specified block
-     @param blockIndex   The block number
-     */
-    this.groundHeight = function(blockIndex)
-    {
-        if (blockIndex < 0 || blockIndex > this.blocks.length) return 0;
 
-        return this.blocks[blockIndex] * this.blockHeight;
-    }
 }

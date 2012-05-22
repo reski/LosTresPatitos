@@ -44,38 +44,22 @@ function ApplicationManager()
 
 
     }
+    this.openEnd = function(gameOutcome){
+        this.cleanSlate();
+        this.endScreen = new EndScreen().startupEndScreen(gameOutcome)
+    }
 
 
     this.openMainMenu = function(){
-        g_GameObjectManager.shutdownAll();
-        g_GameObjectManager.xScroll = 0;
-        g_GameObjectManager.yScroll = 0;
-        //g_score = 0;
+        this.cleanSlate();
         this.mainMenu = new MainMenu().startupMainMenu();
     }
 
-    this.parseShot = function(x,y){
-
-       var posx = Math.floor(x/40);
-       var posy = Math.floor((y-20)/40);
-       if((0 <= posx)&&(posx <=9)&&(posy <=9)&&(0 <=posy)){
-    //   alert('x:'+ posx + 'y '+posy)
-       g_Socket.send(JSON.stringify({
-                        text: "",
-                        cordx : posx,
-                        cordy : posy
-                        }
-                          ));
-      }
+    this.cleanSlate= function(){
+       g_GameObjectManager.shutdownAll();
+       g_GameObjectManager.xScroll = 0;
+       g_GameObjectManager.yScroll = 0;
     }
-    this.mouseDown = function(event){
-         var x, y;
 
-         canoffset = $("canvas").offset();
-         x = event.clientX + document.body.scrollLeft + document.documentElement.scrollLeft - Math.floor(canoffset.left);
-         y = event.clientY + document.body.scrollTop + document.documentElement.scrollTop - Math.floor(canoffset.top) + 1;
-
-       this.parseShot(x,y);
-     }
 
 }
