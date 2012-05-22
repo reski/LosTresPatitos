@@ -51,7 +51,7 @@ function Level()
           new VisualGameObject().startupVisualGameObject(g_ResourceManager.hit, x, y,4);
           break;
         case "SunkShip":
-          new VisualGameObject().startupVisualGameObject(g_ResourceManager.sunk, x, y,4);
+          new AnimatedGameObject().startupAnimatedGameObject(g_ResourceManager.explosion, x, y,4,14,14);
           break;
        }
 

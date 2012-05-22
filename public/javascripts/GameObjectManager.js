@@ -156,6 +156,7 @@ function GameObjectManager()
                     {name: 'sunk', src: '/assets/images/sunk.png'},
                     {name: 'YouLose', src: '/assets/images/YouLose.jpg'},
                     {name: 'YouWin', src: '/assets/images/YouWin.png'},
+                    {name: 'explosion', src: '/assets/images/explosion.png'},
 
 
 
