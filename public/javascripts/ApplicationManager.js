@@ -21,7 +21,7 @@ function ApplicationManager()
         g_ApplicationManager = this;
         this.canvasWidth = canvasWidth;
         this.canvasHeight = canvasHeight;
-        this.openMainMenu();
+        this.startLevel();
 
 
         return this;
