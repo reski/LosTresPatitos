@@ -39,7 +39,9 @@ function Main(){
 this.init =function(socket)
 {
         g_Socket = socket;
+
         new GameObjectManager().startupGameObjectManager(/* boatPositions /*json*/);
+
 }
 }
 function leavingPage(){

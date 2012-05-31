@@ -21,8 +21,8 @@ function ApplicationManager()
         g_ApplicationManager = this;
         this.canvasWidth = canvasWidth;
         this.canvasHeight = canvasHeight;
-        this.startLevel();
-
+        //this.startLevel();
+        init();
 
         return this;
     }
@@ -36,6 +36,7 @@ function ApplicationManager()
         this.backgroundOponent = new AnimatedGameObject().startupAnimatedGameObject(g_ResourceManager.water, 0, 20, 0,10,15);
         this.grid = new VisualGameObject().startupVisualGameObject(g_ResourceManager.grid, 0, 20, 1);
         this.backgroundPlayer = new AnimatedGameObject().startupAnimatedGameObject(g_ResourceManager.water, 410, 20, 0,10,15);
+        this.playerGrid = new VisualGameObject().startupVisualGameObject(g_ResourceManager.grid, 410, 20, 1);
 
 
         this.level = new Level().startupLevel(this.canvasWidth, this.canvasHeight);

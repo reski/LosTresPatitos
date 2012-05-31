@@ -126,3 +126,39 @@ body {
 .message.join, .message.quit {
     background: #D9E7FB;
 }
+
+#popUpBack {
+    position: absolute;
+    top : 0;
+    left : 0;
+    display: block;
+    width :100%;
+    height : 100%;
+    background-color : rgba(40,40,40,0.8);
+    z-index: 9;
+
+}
+#strategy{
+    display :block;
+    position : absolute;
+    top:50%;
+    left:50%;
+    z-index: 10;
+    width : 620px;
+    height : 600px;
+    margin-top : -300px;
+    margin-left: -310px;
+    border-radius : 20px;
+    box-shadow : 5px 5px 5px 3px rgba(0,0,0,0.5);
+    background-color: #eee;
+}
+#strategyCanvas{
+     position: absolute;
+     top:50px;
+     left:10px;
+ }
+#strategyButton{
+    width : 200px;
+    margin: 5px auto;
+
+}
