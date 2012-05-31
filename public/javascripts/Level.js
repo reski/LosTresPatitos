@@ -8,26 +8,25 @@ function Level()
    this.ship3b = new Array(0, 220, 3, 280,100,3);
    this.ship4b = new Array(200, 300, 3);*/
 
-   this.ship1 = new Array(815,0, 3);
+  /* this.ship1 = new Array(815,0, 3);
    this.ship2 = new Array(815,45, 3);
    this.ship3 = new Array(815, 125 , 3);
-   this.ship4 = new Array(815, 170, 3);
+   this.ship4 = new Array(815, 170, 3);*/
 
     /**
      Initialises this object
      */
-    this.startupLevel = function(canvasWidth, canvasHeight/*, Json boatPosition*/)
+    this.startupLevel = function(canvasWidth, canvasHeight, ships)
     {
-/*
-        this.addVisualObject(g_ResourceManager.ship1bad, this.ship1b);
+      var multiplier = 40;
+      var adder = 410;
+       /* this.addVisualObject(g_ResourceManager.ship1bad, this.ship1b);
         this.addVisualObject(g_ResourceManager.ship2bad, this.ship2b);
         this.addVisualObject(g_ResourceManager.ship3bad, this.ship3b);
         this.addVisualObject(g_ResourceManager.ship4bad, this.ship4b);*/
-
-        this.addVisualObject(g_ResourceManager.ship1good, this.ship1);
-        this.addVisualObject(g_ResourceManager.ship2good, this.ship2);
-        this.addVisualObject(g_ResourceManager.ship3good, this.ship3);
-        this.addVisualObject(g_ResourceManager.ship4good, this.ship4);
+      for(var i = 0 ; i<ships.length; i++)  {
+        new VisualGameObject().startupVisualGameObject(ships[i].image, ((ships[i].x*multiplier)+adder),(ships[i].y*multiplier)+20,3);
+       }
 
 
 

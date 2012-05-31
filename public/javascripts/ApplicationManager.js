@@ -27,7 +27,7 @@ function ApplicationManager()
         return this;
     }
 
-    this.startLevel = function(boatPosition /*json con los barcos*/)
+    this.startLevel = function(ships)
     {
 
         g_GameObjectManager.shutdownAll();
@@ -39,7 +39,7 @@ function ApplicationManager()
         this.playerGrid = new VisualGameObject().startupVisualGameObject(g_ResourceManager.grid, 410, 20, 1);
 
 
-        this.level = new Level().startupLevel(this.canvasWidth, this.canvasHeight);
+        this.level = new Level().startupLevel(this.canvasWidth, this.canvasHeight,ships);
 
 
 
