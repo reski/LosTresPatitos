@@ -28,8 +28,13 @@ function init() {
     grid.x = 0;
     grid.y = 20;
     grid.scale =1;
+    var metal = new Bitmap(g_ResourceManager.metal);
+    metal.x = 0;
+    metal.y = 20;
+    metal.scale =1;
 	container = new Container();
 
+    stage.addChild(metal);
     stage.addChild(grid);
     stage.addChild(container);
 
@@ -49,11 +54,11 @@ function startupShips(ships){
      	 bitmap.y = 100;
      	 bitmap.regX = bitmap.image.width/2|0;
      	 bitmap.regY = bitmap.image.height/2|0;
-     	 if(ships[i].src == "/assets/images/ship4good.png") {
-     	 bitmap.regY = 0;
-         }
+         if(ships[i].name == "ship4good" || ships[i].name == "ship3good")  bitmap.offset = bitmap.image.height;
+
+
          bitmap.scale =1;
-         bitmap.name = "ship_"+(i+1);
+         bitmap.name = ships[i].name;
 
 
      		// wrapper function to provide scope for the event handlers:
@@ -68,12 +73,26 @@ function startupShips(ships){
      				evt.onMouseMove = function(ev) {
      					target.x = ev.stageX+offset.x;
      					target.y = ev.stageY+offset.y;
+     				if(target.rotation == 0){
      					if((target.x - target.regX)<0)target.x = target.regX;
      					if((target.y - target.regY)<0)target.y = target.regY;
+                        if((target.y + target.regY)>420)target.y = 420-target.regY
+     				}else{
+     				   if((target.x - target.regY)<0)target.x = target.regY;
+                       if((target.y - target.regX)<0)target.y = target.regX;
+                       if((target.y + target.regX)>420)target.y = 420-target.regX
+     				}
+
      					// indicate that the stage should be updated on the next tick:
      					update = true;
      				}
      			}
+     			bitmap.onDoubleClick = function() {
+                   var rot = target.rotation;
+                   if(rot == 0)target.rotation = 90;
+                   if(rot == 90)target.rotation = 0;
+                   update = true;
+                }
      			bitmap.onMouseOver = function() {
      				target.scaleX = target.scaleY = target.scale*1.2;
      				update = true;
@@ -106,10 +125,22 @@ function getChildrenPos(){
 function parsePositions(children){
     for(var i = 0 ; i<children.length; i++){
         var ship = children[i];
-        children[i].x = Math.floor((ship.x-ship.regX)/40);
-        children[i].y = Math.floor((ship.y-ship.regY- 20)/40);
-        if(children[i].x < 0) children[i].x =0;
-        if(children[i].y <0 ) children[i].y =0;
+     if(ship.rotation == 0){
+        ship.x = Math.round((ship.x-ship.regX)/40);
+        if(ship.offset) ship.y = Math.floor((ship.y-ship.regY - 40 + ship.offset)/40);
+        else{ ship.y = Math.round((ship.y-ship.regY - 10 )/40);}
+
+      }else{
+        ship.y = Math.round((ship.y-ship.regX- 20)/40);
+        if(ship.offset) ship.x = Math.floor((ship.x+ship.regY - ship.offset+20)/40);
+        else{ ship.x = Math.round((ship.x-ship.regY - 10 )/40);}
+      }
+
+
+       if(ship.x < 0) ship.x =0;
+       if(ship.y < 0) ship.y =0;
+       if(ship.y > 9) ship.y =9;
+       if(ship.x > 9) ship.x =9;
 
     }
 

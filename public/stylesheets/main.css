@@ -151,11 +151,12 @@ body {
     border-radius : 20px;
     box-shadow : 5px 5px 5px 3px rgba(0,0,0,0.5);
     background-color: #eee;
+    background-image:url('/assets/images/background.png');
 }
 #strategyCanvas{
      position: absolute;
-     top:50px;
-     left:10px;
+     top:70px;
+     left:100px;
  }
 #strategyButton{
     width : 200px;

@@ -150,6 +150,14 @@ function GameObjectManager()
                     {name: 'ship2bad', src: '/assets/images/ship2bad.png'},
                     {name: 'ship3bad', src: '/assets/images/ship3bad.png'},
                     {name: 'ship4bad', src: '/assets/images/ship4bad.png'},
+                    {name: 'ship1goodr', src: '/assets/images/ship1goodr.png'},
+                    {name: 'ship2goodr', src: '/assets/images/ship2goodr.png'},
+                    {name: 'ship3goodr', src: '/assets/images/ship3goodr.png'},
+                    {name: 'ship4goodr', src: '/assets/images/ship4goodr.png'},
+                    {name: 'ship1badr', src: '/assets/images/ship1badr.png'},
+                    {name: 'ship2badr', src: '/assets/images/ship2badr.png'},
+                    {name: 'ship3badr', src: '/assets/images/ship3badr.png'},
+                    {name: 'ship4badr', src: '/assets/images/ship4badr.png'},
                     {name: 'grid', src: '/assets/images/grid.png'},
                     {name: 'hit', src: '/assets/images/hit.png'},
                     {name: 'missed', src: '/assets/images/missed.png'},
@@ -157,6 +165,7 @@ function GameObjectManager()
                     {name: 'YouLose', src: '/assets/images/YouLose.jpg'},
                     {name: 'YouWin', src: '/assets/images/YouWin.png'},
                     {name: 'explosion', src: '/assets/images/explosion.png'},
+                    {name: 'metal', src: '/assets/images/metal.png'},
 
 
 

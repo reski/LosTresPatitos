@@ -35,6 +35,7 @@ function ResourceManager()
 
             // assign the .src property of the Image object
             thisImage.src = images[i].src;
+            thisImage.name= images[i].name;
         }
 
         return this;

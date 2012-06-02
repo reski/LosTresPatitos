@@ -20,14 +20,45 @@ function Level()
     {
       var multiplier = 40;
       var adder = 410;
-       /* this.addVisualObject(g_ResourceManager.ship1bad, this.ship1b);
-        this.addVisualObject(g_ResourceManager.ship2bad, this.ship2b);
-        this.addVisualObject(g_ResourceManager.ship3bad, this.ship3b);
-        this.addVisualObject(g_ResourceManager.ship4bad, this.ship4b);*/
+
       for(var i = 0 ; i<ships.length; i++)  {
-        new VisualGameObject().startupVisualGameObject(ships[i].image, ((ships[i].x*multiplier)+adder),(ships[i].y*multiplier)+20,3);
+      var ship= ships[i];
+      if(ship.rotation == 0){
+        switch(ship.name){
+            case "ship1good":
+                new VisualGameObject().startupVisualGameObject(ship.image, ((ship.x*multiplier)+adder+3),(ship.y*multiplier)+15,3);
+                break;
+            case "ship2good":
+                new VisualGameObject().startupVisualGameObject(ship.image, ((ship.x*multiplier)+adder- 3),(ship.y*multiplier)+20,3);
+                break;
+            case "ship3good":
+                new VisualGameObject().startupVisualGameObject(ship.image, ((ship.x*multiplier)+adder),(ship.y*multiplier),3);
+                break;
+            case "ship4good":
+                new VisualGameObject().startupVisualGameObject(ship.image, ((ship.x*multiplier)+adder),(ship.y*multiplier)-20,3);
+                break;
+
+        }
+      }else{
+         switch(ship.name){
+           case "ship1good":
+               new VisualGameObject().startupVisualGameObject(g_ResourceManager.ship1goodr, ((ship.x*multiplier)+adder- 3),(ship.y*multiplier)+19,3);
+               break;
+           case "ship2good":
+                new VisualGameObject().startupVisualGameObject(g_ResourceManager.ship2goodr, ((ship.x*multiplier)+adder- 1),(ship.y*multiplier)+18,3);
+                break;
+           case "ship3good":
+                new VisualGameObject().startupVisualGameObject(g_ResourceManager.ship3goodr, ((ship.x*multiplier)+adder),(ship.y*multiplier)+20,3);
+                break;
+           case "ship4good":
+                new VisualGameObject().startupVisualGameObject(g_ResourceManager.ship4goodr, ((ship.x*multiplier)+adder),(ship.y*multiplier)+20,3);
+                break;
+
+             }
        }
 
+
+      }
 
 
         return this;
