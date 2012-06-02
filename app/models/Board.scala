@@ -1,5 +1,8 @@
 package models
 
+import play.api.libs.json.JsValue
+
+
 case class Board(var tiles: Array[Array[Tile]]) {
 
   var boatsLeft:Int = 0
@@ -17,6 +20,15 @@ case class Board(var tiles: Array[Array[Tile]]) {
 }
 
 object Board {
+  def fillBoard(array: Array[JsValue]): Board ={
+    var board: Board = Board.emptyBoard()
+    array.foreach(boat => {
+      val ship: Ship = Ship.byName((boat \ "name"))
+
+    })
+    board
+  }
+
 
   def defaultBoard(): Board = {
 

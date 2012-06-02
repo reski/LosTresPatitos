@@ -83,7 +83,8 @@
     chatSocket.send(JSON.stringify(
     {text: $("#talk").val(),
     cordx: -1,
-    cordy: -1 }
+    cordy: -1,
+    boats : new Array()}
     ));
     $("#talk").val('');
     }

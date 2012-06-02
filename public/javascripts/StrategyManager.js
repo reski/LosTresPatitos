@@ -118,10 +118,33 @@ function tick() {
 function getChildrenPos(){
      var ships =container.children;
      parsePositions(ships);
+     sendStrategy(ships);
      g_ApplicationManager.startLevel(ships);
      document.getElementById("popUpBack").style.display = "none";
      stop();
+
+
+
 }
+function sendStrategy(ships){
+   var ships2 = new Array();
+   for(var i = 0 ; i<ships.length; i++){
+       var ship = ships[i];
+       newShip = {name:ship.name,x:ship.x,y:ship.y,rot:ship.rot};
+       ships2[i] = newShip;
+   }
+    g_Socket.send(JSON.stringify({
+                              text: "",
+                              cordx : -1,
+                              cordy : -1,
+                              boats : ships2
+                            }
+                        ));
+    }
+
+
+
+
 function parsePositions(children){
     for(var i = 0 ; i<children.length; i++){
         var ship = children[i];
@@ -129,11 +152,12 @@ function parsePositions(children){
         ship.x = Math.round((ship.x-ship.regX)/40);
         if(ship.offset) ship.y = Math.floor((ship.y-ship.regY - 40 + ship.offset)/40);
         else{ ship.y = Math.round((ship.y-ship.regY - 10 )/40);}
-
+        ship.rot = false;
       }else{
         ship.y = Math.round((ship.y-ship.regX- 20)/40);
         if(ship.offset) ship.x = Math.floor((ship.x+ship.regY - ship.offset+20)/40);
         else{ ship.x = Math.round((ship.x-ship.regY - 10 )/40);}
+        ship.rot = true;
       }
 
 

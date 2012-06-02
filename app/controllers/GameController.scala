@@ -19,9 +19,14 @@ object GameController extends Controller {
     val text: String = (shot \ "text").as[String]
     val x: Int = (shot \ "cordx").as[Int]
     val y: Int = (shot \ "cordy").as[Int]
+    val boats: Array[JsValue] = (shot \ "boats").as[Array[JsValue]]
 
     if (!text.equals("")) {
       game.chat(username, text);
+    }
+    if(boats.length != 0){
+
+       game.fillBoard(username,boats)
     }
 
     if (x != -1 && y != -1) {
@@ -39,8 +44,8 @@ object GameController extends Controller {
       } else {
         game.notYourTurn(username);
       }
-
     }
+
     true
   }
 
@@ -52,7 +57,7 @@ object GameController extends Controller {
 
 
   def checkIfGameAvailable(userName: String): (String, List[String]) = {
-    if (game.player1 == "") {
+    if (game.player1 != "afsd") {
       game.player1 = userName
       ("Waiting for chalenger", List(game.player1))
     } else if (game.player2 == "") {
@@ -64,6 +69,8 @@ object GameController extends Controller {
     }
 
   }
+
+
 
 
 }

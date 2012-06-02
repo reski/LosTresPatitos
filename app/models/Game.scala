@@ -6,6 +6,8 @@ import scala.Predef._
 
 class Game {
 
+
+
   var currentPlayer = "";
   var player1: String = "";
   var player2: String = "";
@@ -26,6 +28,9 @@ class Game {
     player.board = Board.defaultBoard();
     players += (username -> player)
 
+  }
+  def fillBoard(username:String, boats: Array[JsValue]){
+    players(username).board = Board.fillBoard(boats)
   }
 
   def shoot(username: String, x: Int, y: Int):ShootResult.Value= {

@@ -107,7 +107,8 @@ function Level()
           g_Socket.send(JSON.stringify({
                            text: "",
                            cordx : posx,
-                           cordy : posy
+                           cordy : posy,
+                           boats : new Array()
                            }
                              ));
          }
