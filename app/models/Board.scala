@@ -10,7 +10,7 @@ case class Board(var tiles: Array[Array[Tile]]) {
     val y: Int = (boat \ "y").as[Int]
     val rot: Boolean = (boat \ "rot").as[Boolean]
 
-    (boat \ "name").toString() match{
+    (boat \ "name").as[String] match{
       case "ship1good" =>
         val ship:Ship =Ship.smallShip()
         this.tiles(x)(y) = Tile(Some(ship))
@@ -48,6 +48,7 @@ case class Board(var tiles: Array[Array[Tile]]) {
 
         }
     }
+    this.boatsLeft += 1
   }
 
 
