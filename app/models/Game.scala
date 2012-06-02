@@ -31,6 +31,7 @@ class Game {
   }
   def fillBoard(username:String, boats: Array[JsValue]){
     players(username).board = Board.fillBoard(boats)
+    println("board filled")
   }
 
   def shoot(username: String, x: Int, y: Int):ShootResult.Value= {

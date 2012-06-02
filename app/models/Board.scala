@@ -5,6 +5,53 @@ import play.api.libs.json.JsValue
 
 case class Board(var tiles: Array[Array[Tile]]) {
 
+  def addShip(boat: JsValue){
+    val x: Int = (boat \ "x").as[Int]
+    val y: Int = (boat \ "y").as[Int]
+    val rot: Boolean = (boat \ "rot").as[Boolean]
+
+    (boat \ "name").toString() match{
+      case "ship1good" =>
+        val ship:Ship =Ship.smallShip()
+        this.tiles(x)(y) = Tile(Some(ship))
+
+      case "ship2good" =>
+        val ship:Ship = Ship.mediumShip()
+        this.tiles(x)(y) = Tile(Some(ship))
+        if(rot) this.tiles(x+1)(y) = Tile(Some(ship))
+        else  this.tiles(x)(y+1) = Tile(Some(ship))
+
+
+      case "ship3good" =>
+        val ship:Ship = Ship.largeShip()
+        this.tiles(x)(y) = Tile(Some(ship))
+        if(rot){
+          this.tiles(x)(y+1) = Tile(Some(ship))
+          this.tiles(x)(y+2) = Tile(Some(ship))
+        }
+        else {
+          this.tiles(x+1)(y) = Tile(Some(ship))
+          this.tiles(x+2)(y) = Tile(Some(ship))
+        }
+
+      case "ship4good" =>
+        val ship:Ship = Ship.xLargeShip()
+        this.tiles(x)(y) = Tile(Some(ship))
+        if(rot){
+          this.tiles(x)(y+1) = Tile(Some(ship))
+          this.tiles(x)(y+2) = Tile(Some(ship))
+          this.tiles(x+1)(y+2) =Tile(Some(ship))
+        }else {
+          this.tiles(x+1)(y) = Tile(Some(ship))
+          this.tiles(x+2)(y) = Tile(Some(ship))
+          this.tiles(x+2)(y+1) =Tile(Some(ship))
+
+        }
+    }
+  }
+
+
+
   var boatsLeft:Int = 0
 
   def shoot(x: Int, y: Int): ShootResult.Value = {
@@ -17,15 +64,13 @@ case class Board(var tiles: Array[Array[Tile]]) {
       ShootResult.AlreadyFired
     }
   }
+
 }
 
 object Board {
   def fillBoard(array: Array[JsValue]): Board ={
     var board: Board = Board.emptyBoard()
-    array.foreach(boat => {
-      val ship: Ship = Ship.byName((boat \ "name"))
-
-    })
+    array.foreach(boat => board.addShip(boat))
     board
   }
 

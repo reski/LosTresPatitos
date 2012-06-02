@@ -17,15 +17,6 @@ case class Ship(id: Long, size: Int) {
 }
 
 object Ship{
-  def byName(value: JsValue): Ship ={
-      value.toString() match{
-        case ship1good => Ship.smallShip()
-        case ship2good => Ship.mediumShip()
-        case ship3good => Ship.largeShip()
-        case ship4good => Ship.xLargeShip()
-      }
-  }
-
 
   def smallShip(): Ship = {
     Ship(1,1)
