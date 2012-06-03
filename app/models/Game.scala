@@ -25,13 +25,42 @@ class Game {
   def addPlayer(username: String, out: PushEnumerator[JsValue])={
     val player: Player = new Player();
     player.out = out;
-    player.board = Board.defaultBoard();
+    //player.board = Board.defaultBoard();
     players += (username -> player)
 
   }
   def fillBoard(username:String, boats: Array[JsValue]){
     players(username).board = Board.fillBoard(boats)
-    println("board filled")
+    players(username).strategySet = true
+    setCurrentPlayer(username)
+  }
+
+  def setDefaultBoard(username:String){
+    players(username).board = Board.defaultBoard()
+    players(username).strategySet = true
+    setCurrentPlayer(username)
+  }
+  def setCurrentPlayer(username : String){
+    if(player2 != ""){
+      if (username.equals(player1)){
+        if (players(player2).strategySet){
+          players(player1).out.push(createJson("The Game has started. Oponents Move","BattleLord"))
+          players(player2).out.push(createJson("The Game has started. Your Move","BattleLord"))
+          currentPlayer = player2
+        }else{
+          players(player2).out.push(createJson("Oponent to Finished Strategy","BattleLord"))
+        }
+      }else if(username.equals(player2)){
+        if (players(player1).strategySet){
+          players(player2).out.push(createJson("The Game has started. Oponents Move","BattleLord"))
+          players(player1).out.push(createJson("The Game has started. Your Move","BattleLord"))
+          currentPlayer = player1
+        }else{
+          players(player1).out.push(createJson("Oponent to Finished Strategy","BattleLord"))
+        }
+
+      }
+    }
   }
 
   def shoot(username: String, x: Int, y: Int):ShootResult.Value= {
@@ -48,11 +77,10 @@ class Game {
     players(player1).out.push(json)
   }
 
-  def startingMessage (username : String) = {
-    if (username.equals(player2)){
-      players(player1).out.push(createJson("The Game has started. Oponents Move","BattleLord"))
+  def informOponentEntered() = {
+      players(player1).out.push(createJson("Waiting For Oponent to finish Strategy","BattleLord"))
   }
-  }
+
   def informShotResult(value: ShootResult.Value,x:Int,y:Int){
     if (currentPlayer.equals(player1)){
       players(player1).out.push(createJsonShot("You ",value,x,y,false))

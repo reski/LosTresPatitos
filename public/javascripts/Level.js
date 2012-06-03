@@ -63,6 +63,19 @@ function Level()
 
         return this;
     }
+    this.startUpDefault =function(){
+        var ship1 = new Array(450,220, 3,410,340,3);
+        var ship2 = new Array(530,180, 3);
+        var ship3 = new Array(410, 0 , 3, 500,340,3);
+        var ship4 = new Array(700, 260, 3);
+
+        this.addVisualObject(g_ResourceManager.ship1good, this.ship1);
+        this.addVisualObject(g_ResourceManager.ship2good, this.ship2);
+        this.addVisualObject(g_ResourceManager.ship3good, this.ship3);
+        this.addVisualObject(g_ResourceManager.ship4good, this.ship4);
+
+
+    }
     this.paintShot = function(shotResult,x,y,gettingShot){
        var multiplier = 40;
        var adder = 0;

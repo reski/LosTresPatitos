@@ -8,5 +8,6 @@ class Player() {
 
   var out: PushEnumerator[JsValue]= null
   var board: Board = null
+  var strategySet:Boolean = false
 
 }

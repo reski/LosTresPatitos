@@ -134,8 +134,15 @@ function getChildrenPos(){
 }
 
 function defaultStrategy(){
-
-    //todo send default strategy
+     g_Socket.send(JSON.stringify({
+                text: "",
+                cordx : -1,
+                cordy : -1,
+                boats : new Array("default"),
+                default : true
+            }
+        ));
+    g_ApplicationManager.startUpDefault();
     document.getElementById("popUpBack").style.display = "none";
     //makes sure no alerts are left
     document.getElementById("alert").style.display = "none";
@@ -200,7 +207,8 @@ function sendStrategy(ships){
             text: "",
             cordx : -1,
             cordy : -1,
-            boats : ships2
+            boats : ships2,
+            default : false
         }
     ));
 }

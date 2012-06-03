@@ -25,8 +25,10 @@ object GameController extends Controller {
       game.chat(username, text);
     }
     if(boats.length != 0){
+      var default :Boolean = (shot \ "default").as[Boolean]
+      if(default) game.setDefaultBoard(username)
+      else game.fillBoard(username,boats)
 
-       game.fillBoard(username,boats)
     }
 
     if (x != -1 && y != -1) {
@@ -51,19 +53,19 @@ object GameController extends Controller {
 
   def addPlayer(s: String, out: PushEnumerator[JsValue]) = {
     game.addPlayer(s, out)
-    game.startingMessage(s);
+    //game.startingMessage(s);
 
   }
 
 
   def checkIfGameAvailable(userName: String): (String, List[String]) = {
-    if (game.player1 != "mkasddf") {
+    if (game.player1 == "") {
       game.player1 = userName
       ("Waiting for chalenger", List(game.player1))
     } else if (game.player2 == "") {
       game.player2 = userName
-      game.currentPlayer = game.player2
-      ("The Game has started. Your Move", List(game.player2, game.player1))
+      game.informOponentEntered()
+      ("Waiting for chalenger to Finish Strategy", List(game.player2, game.player1))
     } else {
       ("", null)
     }
