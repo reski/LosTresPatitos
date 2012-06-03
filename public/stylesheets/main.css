@@ -185,7 +185,7 @@ body {
 }
 
 #alert, #alert2 , #alert3 {
-    position: absolute;
+    position: fixed;
     top: -3px;
     left: 50%;
     display: none;

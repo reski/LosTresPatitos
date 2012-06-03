@@ -73,7 +73,7 @@
 
 <div class="alert alert-error" id="alert2">
     <strong>Warning!</strong> Invalid boat placement!.
-    <button class="btn btn-warning" onclick="toggleAlert('alert2')"> Back </button>
+    <button class="close" onclick="toggleAlert('alert2')">×</button>
 </div>
 
 <div class="alert alert-error" id="alert3">
@@ -85,7 +85,7 @@
 
 <script type="text/javascript" charset="utf-8">
 
-    var autoPlay = true;
+    var autoPlay = false;
     var bot;
     var suggested;
 
@@ -147,15 +147,14 @@
         var posx = data.shotpos.posx;
         var posy = data.shotpos.posy;
 
-        if (data.gettingShot == false) {
+        if (data.gettingShot === 'false') {
 
 
-            // todo feed the bot
-            // bot.update(posx,posy,shotResult ) ;
+           bot.update(posx,posy,'water' ) ;
 
 
             //todo suggested should not be here
-            suggested = bot.suggest();
+         // suggested = bot.suggest();
 
         }
 
@@ -205,8 +204,10 @@
     function toggleAutoPlay(){
         if(autoPlay){
             autoPlay= false;
+            toggleAlert('alert3');
         } else {
             autoPlay = true;
+            toggleAlert('alert3');
         }
     }
 
