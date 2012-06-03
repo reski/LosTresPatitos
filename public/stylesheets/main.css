@@ -1,17 +1,20 @@
 html, body {
     background-color: #eee;
 }
+
 body {
 
 }
+
 .container > footer p {
     text-align: center; /* center align it with the container */
 }
+
 .container {
     width: 98%; /* downsize our container to make the content feel a bit tighter and more cohesive. NOTE: this removes two full columns from the grid, meaning you only go to 14 columns and not 16. */
 }
 
-.someContainer{
+.someContainer {
 
     padding: 0 20px;
 }
@@ -22,11 +25,11 @@ body {
     padding: 20px;
     margin: 0 -20px; /* negative indent the amount of the padding to maintain the grid system */
     -webkit-border-radius: 0 0 6px 6px;
-       -moz-border-radius: 0 0 6px 6px;
-            border-radius: 0 0 6px 6px;
-    -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.15);
-       -moz-box-shadow: 0 1px 2px rgba(0,0,0,.15);
-            box-shadow: 0 1px 2px rgba(0,0,0,.15);
+    -moz-border-radius: 0 0 6px 6px;
+    border-radius: 0 0 6px 6px;
+    -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, .15);
+    -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, .15);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, .15);
     min-height: 10px;
 }
 
@@ -62,8 +65,6 @@ body {
     width: 200px;
 }
 
-
-
 #onError {
     display: none;
 }
@@ -71,22 +72,23 @@ body {
 #messageGroup {
     overflow: hidden;
 }
+
 #messages {
-    height:300px;
-    overflow:scroll;
+    height: 300px;
+    overflow: scroll;
 
 }
+
 #canvas {
-   position: relative;
-   left: 0px;
+    position: relative;
+    left: 0px;
 
 }
 
-#onChat{
-   width: 30%;
-   float:right;
+#onChat {
+    width: 30%;
+    float: right;
 }
-
 
 #talk {
     width: 85%;
@@ -129,37 +131,65 @@ body {
 
 #popUpBack {
     position: absolute;
-    top : 0;
-    left : 0;
+    top: 0;
+    left: 0;
     display: block;
-    width :100%;
-    height : 100%;
-    background-color : rgba(40,40,40,0.8);
+    width: 100%;
+    height: 100%;
+    background-color: rgba(40, 40, 40, 0.8);
     z-index: 9;
 
 }
-#strategy{
-    display :block;
-    position : absolute;
-    top:50%;
-    left:50%;
-    z-index: 10;
-    width : 620px;
-    height : 600px;
-    margin-top : -300px;
-    margin-left: -310px;
-    border-radius : 20px;
-    box-shadow : 5px 5px 5px 3px rgba(0,0,0,0.5);
-    background-color: #eee;
-    background-image:url('/assets/images/background.png');
-}
-#strategyCanvas{
-     position: absolute;
-     top:70px;
-     left:100px;
- }
-#strategyButton{
-    width : 200px;
-    margin: 5px auto;
 
+#strategy {
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 10;
+    width: 620px;
+    height: 600px;
+    margin-top: -300px;
+    margin-left: -310px;
+    border-radius: 20px;
+    box-shadow: 5px 5px 5px 3px rgba(0, 0, 0, 0.5);
+    background-color: #eee;
+    background-image: url('/assets/images/background.png');
+}
+
+#strategyCanvas {
+    position: absolute;
+    top: 70px;
+    left: 100px;
+}
+
+#strategyButton {
+    width: 90px;
+    height: 40px;
+    position: absolute;
+    top: 536px;
+    left: 0px;
+    background-color: transparent;
+    border: none;
+
+}
+
+#strategyButtonCancel {
+    width: 90px;
+    height: 40px;
+    position: absolute;
+    top: 537px;
+    left: 517px;
+    background-color: transparent;
+    border: none;
+}
+
+#alert {
+    position: absolute;
+    top: -3px;
+    left: 50%;
+    display: none;
+    z-index: 50;
+    width: 430px;
+    margin-left: -215px;
 }

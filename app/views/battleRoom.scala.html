@@ -58,14 +58,25 @@
 
             </p>
         </canvas>
-        <button id="strategyButton" class= "btn btn-primary" onclick="getChildrenPos()"> Who lives In a pineapple under the sea?</button>
+        <button id="strategyButton" onclick="getChildrenPos()"> </button>
+        <button id="strategyButtonCancel" onclick="toggleAlert()"> </button>
 
     </div>
+</div>
+
+<div class="alert" id="alert">
+    <strong>Warning!</strong> Cancelling will set you a default strategy!.
+    <button class="btn btn-warning" onclick="defaultStrategy()"> Default </button>
+    <button class="btn btn-danger" onclick="toggleAlert()"> Back </button>
 </div>
 
 
 
 <script type="text/javascript" charset="utf-8">
+
+    var autoPlay = true;
+    var bot;
+    var suggested;
 
 
     $(function() {
@@ -75,9 +86,9 @@
 
     new Main().init(chatSocket);
 
-    var autoPlay = true;
-    var bot = new BattleshipBot();
-    var suggested;
+    bot = new BattleshipBot();
+
+
 
     var sendMessage = function() {
     chatSocket.send(JSON.stringify(
@@ -120,16 +131,25 @@
     }
 
     if(data.shotResult){
-        if (autoPlay && data.getingShot) {
 
-        suggested = bot.suggest();
+        var shotResult = data.shotResult;
+        var posx = data.shotpos.posx;
+        var posy = data.shotpos.posy;
 
-        } else {
-            var shotResult = data.shotResult;
-            var posx = data.shotpos.posx;
-            var posy = data.shotpos.posy;
-            g_ApplicationManager.level.paintShot(shotResult,posx,posy,data.gettingShot);
+        if (data.gettingShot='false') {
+
+
+            // todo feed the bot
+            // bot.update(posx,posy,shotResult ) ;
+
+
+            //todo suggested should not be here
+            suggested = bot.suggest();
+
         }
+
+            g_ApplicationManager.level.paintShot(shotResult,posx,posy,data.gettingShot);
+
     }
 
 
@@ -161,6 +181,14 @@
     var div = document.getElementById('messages');
     h = div.scrollHeight;
     div.scrollTop = h;
+    }
+
+    function toggleAlert()
+    {
+
+        var div = document.getElementById('alert');
+        if (div.style.display=="none") div.style.display="block";
+        else div.style.display="none";
     }
 
 </script>
