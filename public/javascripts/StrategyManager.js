@@ -137,6 +137,9 @@ function defaultStrategy(){
 
     //todo send default strategy
     document.getElementById("popUpBack").style.display = "none";
+    //makes sure no alerts are left
+    document.getElementById("alert").style.display = "none";
+    document.getElementById("alert2").style.display = "none";
 
 }
 
