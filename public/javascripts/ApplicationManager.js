@@ -27,7 +27,7 @@ function ApplicationManager()
         return this;
     }
 
-    this.startLevel = function(ships)
+    this.startLevel = function(ships,def)
     {
 
         g_GameObjectManager.shutdownAll();
@@ -38,8 +38,8 @@ function ApplicationManager()
         this.backgroundPlayer = new AnimatedGameObject().startupAnimatedGameObject(g_ResourceManager.water, 410, 20, 0,10,15);
         this.playerGrid = new VisualGameObject().startupVisualGameObject(g_ResourceManager.grid, 410, 20, 1);
 
-
-        this.level = new Level().startupLevel(this.canvasWidth, this.canvasHeight,ships);
+        if(def) this.level= new Level().startUpDefault();
+        else this.level = new Level().startupLevel(this.canvasWidth, this.canvasHeight,ships);
 
 
 

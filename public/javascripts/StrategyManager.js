@@ -122,7 +122,7 @@ function getChildrenPos(){
     var newShips =parsePositions(ships);
     if(validateStrategy(newShips)){
         sendStrategy(newShips);
-        g_ApplicationManager.startLevel(newShips);
+        g_ApplicationManager.startLevel(newShips,false);
         document.getElementById("popUpBack").style.display = "none";
         stop();
     } else {
@@ -134,15 +134,16 @@ function getChildrenPos(){
 }
 
 function defaultStrategy(){
+    var newShips = new Array("default");
      g_Socket.send(JSON.stringify({
                 text: "",
                 cordx : -1,
                 cordy : -1,
-                boats : new Array("default"),
+                boats : newShips,
                 default : true
             }
         ));
-    g_ApplicationManager.startUpDefault();
+    g_ApplicationManager.startLevel(newShips,true);
     document.getElementById("popUpBack").style.display = "none";
     //makes sure no alerts are left
     document.getElementById("alert").style.display = "none";
