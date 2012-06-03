@@ -184,7 +184,7 @@ body {
     border: none;
 }
 
-#alert {
+#alert, #alert2 {
     position: absolute;
     top: -3px;
     left: 50%;
@@ -192,4 +192,8 @@ body {
     z-index: 50;
     width: 430px;
     margin-left: -215px;
+}
+
+#alert{
+    z-index: 100;
 }

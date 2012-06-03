@@ -125,6 +125,8 @@ function getChildrenPos(){
         g_ApplicationManager.startLevel(newShips);
         document.getElementById("popUpBack").style.display = "none";
         stop();
+    } else {
+        toggleAlert('alert2');
     }
 
 

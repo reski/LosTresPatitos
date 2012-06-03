@@ -59,7 +59,7 @@
             </p>
         </canvas>
         <button id="strategyButton" onclick="getChildrenPos()"> </button>
-        <button id="strategyButtonCancel" onclick="toggleAlert()"> </button>
+        <button id="strategyButtonCancel" onclick="toggleAlert('alert')"> </button>
 
     </div>
 </div>
@@ -67,7 +67,12 @@
 <div class="alert" id="alert">
     <strong>Warning!</strong> Cancelling will set you a default strategy!.
     <button class="btn btn-warning" onclick="defaultStrategy()"> Default </button>
-    <button class="btn btn-danger" onclick="toggleAlert()"> Back </button>
+    <button class="btn btn-danger" onclick="toggleAlert('alert')"> Back </button>
+</div>
+
+<div class="alert alert-error" id="alert2">
+    <strong>Warning!</strong> Invalid boat placement!.
+    <button class="btn btn-warning" onclick="toggleAlert('alert2')"> Back </button>
 </div>
 
 
@@ -124,7 +129,7 @@
 
     // Update the members list
     if(data.members){
-    $("#members").html('')
+    $("#members").html('')  ;
     $(data.members).each(function() {
     $("#members").append('<li>' + this + '</li>')
     })
@@ -159,7 +164,7 @@
     }
 
 
-    }
+    };
 
 
     var handleReturnKey = function(e) {
@@ -167,13 +172,13 @@
     e.preventDefault();
     sendMessage();
     }
-    }
+    }    ;
 
     $("#talk").keypress(handleReturnKey)
 
     chatSocket.onmessage = receiveEvent;
 
-    })
+    });
 
     function scrollBottom()
     {
@@ -183,12 +188,12 @@
     div.scrollTop = h;
     }
 
-    function toggleAlert()
+    function toggleAlert(alertDiv)
     {
 
-        var div = document.getElementById('alert');
-        if (div.style.display=="none") div.style.display="block";
-        else div.style.display="none";
+        var div = document.getElementById(alertDiv);
+        if (div.style.display=='block') div.style.display="none";
+        else div.style.display='block';
     }
 
 </script>
