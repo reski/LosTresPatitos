@@ -44,7 +44,7 @@ case class Board(var tiles: Array[Array[Tile]]) {
         }else {
           this.tiles(x+1)(y) = Tile(Some(ship))
           this.tiles(x+2)(y) = Tile(Some(ship))
-          this.tiles(x+2)(y+1) =Tile(Some(ship))
+          this.tiles(x+2)(y-1) =Tile(Some(ship))
 
         }
     }

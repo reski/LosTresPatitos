@@ -50,8 +50,8 @@ function startupShips(ships){
     for(var i = 0 ; i<ships.length; i++){
      bitmap = new Bitmap(ships[i]);
      	 container.addChild(bitmap);
-     	 bitmap.x = 450;
-     	 bitmap.y = 100;
+     	 bitmap.x = 200;
+     	 bitmap.y = 200;
      	 bitmap.regX = bitmap.image.width/2|0;
      	 bitmap.regY = bitmap.image.height/2|0;
          if(ships[i].name == "ship4good" || ships[i].name == "ship3good")  bitmap.offset = bitmap.image.height;
@@ -76,11 +76,13 @@ function startupShips(ships){
      				if(target.rotation == 0){
      					if((target.x - target.regX)<0)target.x = target.regX;
      					if((target.y - target.regY)<0)target.y = target.regY;
-                        if((target.y + target.regY)>420)target.y = 420-target.regY
+                        if((target.y + target.regY)>420)target.y = 420-target.regY;
+                        if((target.x + target.regX)>400)target.x = 400-target.regX;
      				}else{
      				   if((target.x - target.regY)<0)target.x = target.regY;
                        if((target.y - target.regX)<0)target.y = target.regX;
-                       if((target.y + target.regX)>420)target.y = 420-target.regX
+                       if((target.y + target.regX)>420)target.y = 420-target.regX;
+                       if((target.x + target.regY)>400)target.x = 400-target.regY;
      				}
 
      					// indicate that the stage should be updated on the next tick:
@@ -117,14 +119,62 @@ function tick() {
 }
 function getChildrenPos(){
      var ships =container.children;
-     parsePositions(ships);
-     sendStrategy(ships);
-     g_ApplicationManager.startLevel(ships);
-     document.getElementById("popUpBack").style.display = "none";
-     stop();
+     var newShips =parsePositions(ships);
+     if(validateStrategy(newShips)){
+        sendStrategy(newShips);
+        g_ApplicationManager.startLevel(newShips);
+        document.getElementById("popUpBack").style.display = "none";
+        stop();
+     }
 
 
 
+}
+function validateStrategy(ships){
+     var posOcupied = new Array()
+     for(var i = 0 ; i<ships.length; i++)  {
+          var ship= ships[i];
+          posOcupied.push(ship.x+""+ship.y);
+          if(ship.rotation == 0){
+            switch(ship.name){
+                case "ship2good":
+                    posOcupied.push(ship.x+""+(ship.y+1));
+                    break;
+                case "ship3good":
+                    posOcupied.push((ship.x+1)+""+ship.y);
+                    posOcupied.push((ship.x+2)+""+ship.y);
+                    break;
+                case "ship4good":
+                    posOcupied.push((ship.x+1)+""+ship.y);
+                    posOcupied.push((ship.x+2)+""+ship.y);
+                    posOcupied.push((ship.x+2)+""+(ship.y -1));
+                    break;
+            }
+          }else{
+             switch(ship.name){
+               case "ship2good":
+                    posOcupied.push((ship.x+1)+""+ship.y);
+                    break;
+               case "ship3good":
+                    posOcupied.push(ship.x+""+(ship.y+1));
+                    posOcupied.push(ship.x+""+(ship.y+2));
+                    break;
+               case "ship4good":
+                    posOcupied.push(ship.x+""+(ship.y+1));
+                    posOcupied.push(ship.x+""+(ship.y+2));
+                    posOcupied.push((ship.x+1)+""+(ship.y+2));
+                    break;
+
+                 }
+           }
+      }
+      var sorted = posOcupied.sort();
+      for (var i = 0; i < sorted.length - 1; i++) {
+          if (sorted[i + 1] == sorted[i]) {
+              return false;
+          }
+      }
+      return true;
 }
 function sendStrategy(ships){
    var ships2 = new Array();
@@ -146,27 +196,31 @@ function sendStrategy(ships){
 
 
 function parsePositions(children){
+    var newShips = new Array();
     for(var i = 0 ; i<children.length; i++){
         var ship = children[i];
+        var newShip =ship.clone();
      if(ship.rotation == 0){
-        ship.x = Math.round((ship.x-ship.regX)/40);
-        if(ship.offset) ship.y = Math.floor((ship.y-ship.regY - 40 + ship.offset)/40);
-        else{ ship.y = Math.round((ship.y-ship.regY - 10 )/40);}
-        ship.rot = false;
+        newShip.x = Math.round((ship.x-ship.regX)/40);
+        if(ship.offset) newShip.y = Math.floor((ship.y-ship.regY - 40 + ship.offset)/40);
+        else{ newShip.y = Math.round((ship.y-ship.regY - 10 )/40);}
+        newShip.rot = false;
       }else{
-        ship.y = Math.round((ship.y-ship.regX- 20)/40);
-        if(ship.offset) ship.x = Math.floor((ship.x+ship.regY - ship.offset+20)/40);
-        else{ ship.x = Math.round((ship.x-ship.regY - 10 )/40);}
-        ship.rot = true;
+        newShip.y = Math.round((ship.y-ship.regX- 20)/40);
+        if(ship.offset) newShip.x = Math.floor((ship.x+ship.regY - ship.offset+20)/40);
+        else{ newShip.x = Math.round((ship.x-ship.regY - 10 )/40);}
+        newShip.rot = true;
       }
 
 
-       if(ship.x < 0) ship.x =0;
-       if(ship.y < 0) ship.y =0;
-       if(ship.y > 9) ship.y =9;
-       if(ship.x > 9) ship.x =9;
+       if(newShip.x < 0) newShip.x =0;
+       if(newShip.y < 0) newShip.y =0;
+       if(newShip.y > 9) newShip.y =9;
+       if(newShip.x > 9) newShip.x =9;
 
+       newShips.push(newShip);
     }
+    return newShips;
 
 }
 
