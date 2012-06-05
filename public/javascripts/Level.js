@@ -12,7 +12,8 @@ function Level()
    this.ship2 = new Array(815,45, 3);
    this.ship3 = new Array(815, 125 , 3);
    this.ship4 = new Array(815, 170, 3);*/
-
+     this.lastX = null;
+     this.lastY = null;
     /**
      Initialises this object
      */
@@ -82,8 +83,11 @@ function Level()
        if(gettingShot === 'true'){
           adder = 410;
        }
+       this.lastX = x;
+       this.lastY = y;
        var x = (parseInt(x)*multiplier)+adder;
        var y = (parseInt(y)*multiplier)+20;
+
 
        new CannonBall().startUpCannonBall(x,y,shotResult);
 
@@ -93,6 +97,21 @@ function Level()
     /**
      Adds the blocks to the screen by creating VisualGameObjects
      */
+     this.echo = function()
+        {
+        if(this.lastX != null){
+         g_Socket.send(JSON.stringify({
+                                    text: "",
+                                    cordx : this.lastX,
+                                    cordy : this.lastY,
+                                    boats : new Array()
+                                    }
+                                      ));
+                  }
+         }
+
+
+
     this.addVisualObject = function(image, coordinatesArray)
     {
         for (i = 0; i < coordinatesArray.length; i = i + 3) {
