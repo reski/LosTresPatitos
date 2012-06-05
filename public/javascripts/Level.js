@@ -88,10 +88,13 @@ function Level()
        switch(shotResult)
         {
         case "Missed":
-          new VisualGameObject().startupVisualGameObject(g_ResourceManager.missed, x, y,4);
+          //new VisualGameObject().startupVisualGameObject(g_ResourceManager.missed, x, y,4);
+          new AnimatedGameObject().startupAnimatedGameObject(g_ResourceManager.miss, x- 15, y- 13,4,10,10);
+
           break;
         case "HitShip":
-          new VisualGameObject().startupVisualGameObject(g_ResourceManager.hit, x, y,4);
+          //new VisualGameObject().startupVisualGameObject(g_ResourceManager.hit, x, y,4);
+          new AnimatedGameObject().startupAnimatedGameObject(g_ResourceManager.fire, x, y,4,5,8);
           break;
         case "SunkShip":
           new AnimatedGameObject().startupAnimatedGameObject(g_ResourceManager.explosion, x, y,4,14,14);

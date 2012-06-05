@@ -160,12 +160,16 @@ function GameObjectManager()
                     {name: 'ship4badr', src: '/assets/images/ship4badr.png'},
                     {name: 'grid', src: '/assets/images/grid.png'},
                     {name: 'hit', src: '/assets/images/hit.png'},
+                    {name: 'Hit2', src: '/assets/images/Hit2.png'},
                     {name: 'missed', src: '/assets/images/missed.png'},
+                    {name: 'miss', src: '/assets/images/superWater2.png'},
                     {name: 'sunk', src: '/assets/images/sunk.png'},
                     {name: 'YouLose', src: '/assets/images/YouLose.jpg'},
                     {name: 'YouWin', src: '/assets/images/YouWin.png'},
                     {name: 'explosion', src: '/assets/images/explosion.png'},
                     {name: 'metal', src: '/assets/images/metal.png'},
+                    {name: 'fire', src: '/assets/images/Flame.png'},
+
 
 
 
