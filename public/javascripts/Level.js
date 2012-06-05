@@ -102,8 +102,8 @@ function Level()
         if(this.lastX != null){
          g_Socket.send(JSON.stringify({
                                     text: "",
-                                    cordx : this.lastX,
-                                    cordy : this.lastY,
+                                    cordx : parseInt(this.lastX),
+                                    cordy : parseInt(this.lastY),
                                     boats : new Array()
                                     }
                                       ));

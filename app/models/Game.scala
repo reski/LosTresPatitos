@@ -78,7 +78,12 @@ class Game {
   }
 
   def informOponentEntered() = {
+
+    if(player1!=""){
       players(player1).out.push(createJson("Waiting For Oponent to finish Strategy","BattleLord"))
+    }
+
+
   }
 
   def informShotResult(value: ShootResult.Value,x:Int,y:Int){
