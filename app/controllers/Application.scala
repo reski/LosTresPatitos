@@ -24,7 +24,7 @@ object Application extends Controller {
 
           } else {
             Redirect(routes.Application.index).flashing(
-              "error" -> "Battle is full");
+              "error" -> "name used");
           }
 
       }.getOrElse {

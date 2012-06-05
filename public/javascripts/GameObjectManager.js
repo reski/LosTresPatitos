@@ -260,7 +260,7 @@ function GameObjectManager()
 
             }
 
-
+            this.removeOldGameObjects();
 
             // then draw the game objects
             for (var x = 0; x < this.gameObjects.length; ++x)

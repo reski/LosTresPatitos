@@ -92,14 +92,14 @@ object Board {
     board.tiles(0)(0) = Tile(Some(ship3b))
     board.tiles(1)(0) = Tile(Some(ship3b))
     board.tiles(2)(0) = Tile(Some(ship3b))
+    board.tiles(2)(8) = Tile(Some(ship3))
     board.tiles(3)(8) = Tile(Some(ship3))
     board.tiles(4)(8) = Tile(Some(ship3))
-    board.tiles(5)(8) = Tile(Some(ship3))
     board.tiles(7)(7) = Tile(Some(ship4))
     board.tiles(8)(7) = Tile(Some(ship4))
     board.tiles(9)(7) = Tile(Some(ship4))
     board.tiles(9)(6) = Tile(Some(ship4))
-    board.boatsLeft= 2
+    board.boatsLeft= 6
     board
   }
 
