@@ -1,5 +1,5 @@
 function CannonBall(){
-this.timer = 1.6;
+//this.timer = 1.6;
 this.x = 0;
 this.y = 0;
 this.shotResult = "Missed";
@@ -14,8 +14,8 @@ this.startUpCannonBall =function(x,y,shotResult){
 this.update = function (/**Number*/ dt, /**CanvasRenderingContext2D*/context, /**Number*/ xScroll,
         /**Number*/ yScroll)
  {
-   this.timer = this.timer -dt;
-   if(this.timer< 0){
+   //this.timer = this.timer -dt;
+   if(this.currentFrame == 21){
    this.shutdownAnimatedGameObject();
    this.paintResult();
    }
@@ -27,13 +27,13 @@ this.paintResult =function(){
 
     switch(this.shotResult)
         {
-        case "Missed":
+        case "miss":
           new AnimatedGameObject().startupAnimatedGameObject(g_ResourceManager.miss, this.x- 12, this.y- 8,4,10,10);
           break;
-        case "HitShip":
+        case "hit":
           new AnimatedGameObject().startupAnimatedGameObject(g_ResourceManager.fire, this.x+3, this.y,4,20,15);
           break;
-        case "SunkShip":
+        default:
           new AnimatedGameObject().startupAnimatedGameObject(g_ResourceManager.explosion, this.x+ 3, this.y +5,4,14,14);
           break;
        }

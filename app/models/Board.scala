@@ -60,7 +60,7 @@ case class Board(var tiles: Array[Array[Tile]]) {
     println("board shoot tile: " + tile.toString)
     if (!tile.alreadyFired) {
       tile.alreadyFired = true
-      tile.ship.map{ship=> ship.hit(this)}.getOrElse{ShootResult.Missed}
+      tile.ship.map{ship=> ship.hit(this)}.getOrElse{ShootResult.miss}
     } else {
       ShootResult.AlreadyFired
     }

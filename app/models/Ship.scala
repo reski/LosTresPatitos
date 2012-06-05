@@ -10,9 +10,14 @@ case class Ship(id: Long, size: Int) {
     hitPoints-=1
     if (hitPoints <= 0) {
       board.boatsLeft-=1
-      ShootResult.SunkShip
+      id match {
+        case 1 => ShootResult.patrol
+        case 2 => ShootResult.patrol
+        case 3 => ShootResult.submarine
+        case 4 => ShootResult.battleship
+      }
     }
-    else ShootResult.HitShip
+    else ShootResult.hit
   }
 }
 

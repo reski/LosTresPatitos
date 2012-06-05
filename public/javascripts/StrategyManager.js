@@ -39,7 +39,7 @@ function init() {
     stage.addChild(container);
 
 
-    var ships = new Array(g_ResourceManager.ship1good,g_ResourceManager.ship2good,g_ResourceManager.ship3good,g_ResourceManager.ship4good)
+    var ships = new Array(g_ResourceManager.ship1good,g_ResourceManager.ship1good,g_ResourceManager.ship2good,g_ResourceManager.ship3good,g_ResourceManager.ship3good,g_ResourceManager.ship4good)
     startupShips(ships);
 }
 
