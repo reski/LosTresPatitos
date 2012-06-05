@@ -85,21 +85,7 @@ function Level()
        var x = (parseInt(x)*multiplier)+adder;
        var y = (parseInt(y)*multiplier)+20;
 
-       switch(shotResult)
-        {
-        case "Missed":
-          //new VisualGameObject().startupVisualGameObject(g_ResourceManager.missed, x, y,4);
-          new AnimatedGameObject().startupAnimatedGameObject(g_ResourceManager.cannonBall, x- 15, y- 13,4,22,16);
-
-          break;
-        case "HitShip":
-          //new VisualGameObject().startupVisualGameObject(g_ResourceManager.hit, x, y,4);
-          new AnimatedGameObject().startupAnimatedGameObject(g_ResourceManager.fire, x, y,4,20,15);
-          break;
-        case "SunkShip":
-          new AnimatedGameObject().startupAnimatedGameObject(g_ResourceManager.explosion, x, y,4,14,14);
-          break;
-       }
+       new CannonBall().startUpCannonBall(x,y,shotResult);
 
     }
 
