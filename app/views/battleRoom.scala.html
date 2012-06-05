@@ -1,4 +1,4 @@
-@(username : String , welcomeText: (String,List[String]))
+@(username : String , welcomeText: (String,List[String],String))
 @main(Some(username)) {
 
 <div class="page-header">
@@ -93,13 +93,11 @@
     $(function() {
     var WS = window['MozWebSocket'] ? MozWebSocket : WebSocket
 
-    var chatSocket = new WS("ws://localhost:9000@routes.Application.connect(username)");
+    var chatSocket = new WS("ws://localhost:9000@routes.Application.connect(username,welcomeText._3)");
 
     new Main().init(chatSocket);
 
     bot = new BattleshipBot();
-
-
 
     var sendMessage = function() {
     chatSocket.send(JSON.stringify(

@@ -9,11 +9,11 @@ import models.{ShootResult, Game}
 
 object GameController extends Controller {
 
-  val games = Map.empty[String, Game];
-  val game = new Game
+  var games = Map.empty[String, Game];
+  var currentGame = new Game
+  var gameid = 0
 
-
-  def parse(username: String, shot: JsValue):Boolean = {
+  def parse(username: String,gameId:String, shot: JsValue):Boolean = {
 
     println("shot: " + shot.toString() + "by :" + username)
     val text: String = (shot \ "text").as[String]
@@ -22,52 +22,57 @@ object GameController extends Controller {
     val boats: Array[JsValue] = (shot \ "boats").as[Array[JsValue]]
 
     if (!text.equals("")) {
-      game.chat(username, text);
+      games(gameId).chat(username, text);
     }
     if(boats.length != 0){
       var default :Boolean = (shot \ "default").as[Boolean]
-      if(default) game.setDefaultBoard(username)
-      else game.fillBoard(username,boats)
+      if(default) games(gameId).setDefaultBoard(username)
+      else games(gameId).fillBoard(username,boats)
 
     }
 
     if (x != -1 && y != -1) {
-      if (username.equals(game.currentPlayer)) {
-        val shot: ShootResult.Value = game.shoot(username, x, y)
+      if (username.equals(games(gameId).currentPlayer)) {
+        val shot: ShootResult.Value = games(gameId).shoot(username, x, y)
         shot match {
           case ShootResult.AlreadyFired => {
             return false}
-          case default => {game.informShotResult(shot,x,y)}
+          case default => {games(gameId).informShotResult(shot,x,y)}
         }
 
         //game.calculateShot(username, x, y)
-        game.changeTurn(username)
+        games(gameId).changeTurn(username)
 
       } else {
-        game.notYourTurn(username);
+        games(gameId).notYourTurn(username);
       }
     }
 
     true
   }
 
-  def addPlayer(s: String, out: PushEnumerator[JsValue]) = {
-    game.addPlayer(s, out)
+  def addPlayer(s: String,gameId :String, out: PushEnumerator[JsValue]) = {
+    games(gameId).addPlayer(s, out)
     //game.startingMessage(s);
 
   }
 
 
-  def checkIfGameAvailable(userName: String): (String, List[String]) = {
-    if (game.player1 == "") {
-      game.player1 = userName
-      ("Waiting for chalenger", List(game.player1))
-    } else if (game.player2 == "") {
-      game.player2 = userName
-      game.informOponentEntered()
-      ("Waiting for chalenger to Finish Strategy", List(game.player2, game.player1))
-    } else {
-      ("", null)
+  def checkIfGameAvailable(userName: String): (String, List[String],String) = {
+    if (currentGame.player1 == "") {
+      currentGame.player1 = userName
+      gameid += 1
+      games += ("game"+gameid -> currentGame)
+      ("Waiting for chalenger", List(currentGame.player1),"game"+gameid)
+    } else if (currentGame.player2 == "" && userName != currentGame.player1 ) {
+      currentGame.player2 = userName
+      currentGame.informOponentEntered()
+      ("Waiting for chalenger to Finish Strategy", List(currentGame.player2, currentGame.player1),"game"+gameid)
+    }else if (currentGame.player1 != "" && currentGame.player2 != ""){
+      currentGame = new Game
+      checkIfGameAvailable(userName)
+    }else {
+      ("", null,"")
     }
 
   }
