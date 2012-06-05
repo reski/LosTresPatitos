@@ -125,7 +125,7 @@ class Game {
     val json = JsObject(
       Seq(
         //"user" -> JsString(user),
-        "message" -> JsString(msg + shotResult.toString),
+        //"message" -> JsString(msg + shotResult.toString),
         "shotResult"->JsString(shotResult.toString),
         "shotpos" -> JsObject(Seq(
           "posx"->JsString(x.toString),

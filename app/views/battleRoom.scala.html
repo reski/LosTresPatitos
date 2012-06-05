@@ -119,6 +119,7 @@
     }
 
     // Create the message element
+    if(data.message){
     var el = $('<div class="message"><span></span><p></p></div>');
     if(data.user) {
     $("span", el).text(data.user);
@@ -130,6 +131,7 @@
     if(data.user == '@username') $(el).addClass('me')
     $('#messages').append(el)
     scrollBottom();
+    }
 
     // Update the members list
     if(data.members){
