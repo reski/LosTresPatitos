@@ -149,18 +149,19 @@
 
         if (data.gettingShot === 'false') {
 
-            var finalResult;
+
+            var shotResultBot;
 
             if(shotResult=='Missed'){
-                shootResult = 'miss' ;
-            } else if (shootResult == 'SunkShip') {
-                 shootResult = 'patrol';
-            }  else {
-                 shootResult = "hit" ;
+                shotResultBot = 'miss' ;
+            } else if (shotResult == 'SunkShip') {
+                shotResultBot = 'patrol';
+            }  else if (shotResult == 'HitShip'){
+                shotResultBot = 'hit' ;
             }
 
 
-           bot.update(parseInt(posx),parseInt(posy),'miss' ) ;
+           bot.update(parseInt(posx),parseInt(posy),shotResultBot ) ;
 
         }
 
