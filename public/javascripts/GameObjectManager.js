@@ -168,7 +168,8 @@ function GameObjectManager()
                     {name: 'YouWin', src: '/assets/images/YouWin.png'},
                     {name: 'explosion', src: '/assets/images/explosion.png'},
                     {name: 'metal', src: '/assets/images/metal.png'},
-                    {name: 'fire', src: '/assets/images/Flame.png'},
+                    {name: 'fire', src: '/assets/images/fire.png'},
+                    {name: 'cannonBall', src: '/assets/images/cannonballsplash.png'},
 
 
 
