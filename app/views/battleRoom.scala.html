@@ -149,16 +149,39 @@
 
         if (data.gettingShot === 'false') {
 
+            var finalResult;
 
-           bot.update(posx,posy,'water' ) ;
+            if(shotResult=='Missed'){
+                shootResult = 'miss' ;
+            } else if (shootResult == 'SunkShip') {
+                 shootResult = 'patrol';
+            }  else {
+                 shootResult = "hit" ;
+            }
 
 
-            //todo suggested should not be here
-         // suggested = bot.suggest();
+           bot.update(parseInt(posx),parseInt(posy),'miss' ) ;
 
         }
 
             g_ApplicationManager.level.paintShot(shotResult,posx,posy,data.gettingShot);
+
+
+            if (autoPlay){
+
+                var point = bot.suggest();
+
+
+                setTimeout(function() {
+                            g_Socket.send(JSON.stringify({
+                            text: "",
+                            cordx : point.x,
+                            cordy : point.y,
+                            boats : new Array()
+                        }
+                ));},1500);
+            }
+
 
     }
 
