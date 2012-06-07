@@ -1,15 +1,20 @@
 @(username : String)
 
 @main(Some(username)){
+<div id="container">
+    <canvas id="canvas" >
+        <p>
+            SERIOUSLY INTERNET EXPLORER?!?!?!?!?!?!?!?
+            Come on! download a real browser that has the canvas element,
+            Like Firefox ,Safari, or Chrome.
+            Peace Out Brothaaaaaa
 
-<canvas id="canvas" width="895" height="600">
-    <p>
-        SERIOUSLY INTERNET EXPLORER?!?!?!?!?!?!?!?
-        Come on! download a real browser that has the canvas element,
-        Like Firefox ,Safari, or Chrome.
-        Peace Out Brothaaaaaa
-
-    </p>
-</canvas>
+        </p>
+    </canvas>
+</div>
+<script src="@routes.Assets.at("javascripts/Water.js")" type="text/javascript"></script>
+<script type="text/javascript">
+    ripple('/assets/images/main.jpg', document.getElementById('canvas'));
+</script>
 }
 

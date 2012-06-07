@@ -6,6 +6,7 @@
 GET     /                           controllers.Application.index
 GET     /battleRoom                 controllers.Application.battleRoom(username: Option[String] ?= None)
 GET     /battleRoom/connect         controllers.Application.connect(username: String,gameId:String)
+GET     /battleship                 controllers.Application.battle
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

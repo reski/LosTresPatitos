@@ -12,6 +12,10 @@ object Application extends Controller {
     implicit request =>
       Ok(views.html.index())
   }
+  def battle = Action {
+    implicit request =>
+      Ok(views.html.battleship("mono"))
+  }
 
   def battleRoom(username: Option[String]) = Action {
     implicit request =>
