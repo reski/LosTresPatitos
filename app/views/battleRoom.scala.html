@@ -2,7 +2,7 @@
 @main(Some(username)) {
 
 <div class="page-header">
-    <h1>Battle Room<small>You are chatting as @username</small></h1>
+    <h1>Battle Room<small>You are battling as @username</small></h1>
 </div>
 
 <div id="onError" class="alert-message error">
@@ -11,22 +11,36 @@
     </p>
 </div>
 
-<div id="onChat" class="row">
-    <div class="span10" id="main">
-        <div id="messages">
-            <div class="message"><span>BattleLord</span><p>@(welcomeText._1)</p></div>
+
+    <canvas id="canvas" width="1000" height="800">
+        <p>
+            SERIOUSLY INTERNET EXPLORER?!?!?!?!?!?!?!?
+            Come on! download a real browser that has the canvas element,
+            Like Firefox ,Safari, or Chrome.
+            Peace Out Brothaaaaaa
+
+        </p>
+    </canvas>
+
+    <div id="onChat" class="row">
+
+        <textarea id="talk" ></textarea>
+        <div class="span10" id="messageGroup">
+            <div id="messages">
+                <div class="message"><span>BattleLord</span><p>@(welcomeText._1)</p></div>
+            </div>
         </div>
-        <textarea id="talk"></textarea>
+        <div id="memberGroup" class="span4">
+            <h2>Members</h2>
+            <ul id="members">
+                @welcomeText._2.map { user =>
+                <li>@user</li>
+                }
+            </ul>
+        </div>
     </div>
-    <div class="span4">
-        <h2>Members</h2>
-        <ul id="members">
-            @welcomeText._2.map { user =>
-            <li>@user</li>
-            }
-        </ul>
-    </div>
-</div>
+
+
 
 <script type="text/javascript" charset="utf-8">
 
@@ -83,9 +97,20 @@
 
     chatSocket.onmessage = receiveEvent
 
-
     })
 
 </script>
+<script src="@routes.Assets.at("javascripts/GameObject.js")" type="text/javascript"></script>
+<script src="@routes.Assets.at("javascripts/ResourceManager.js")" type="text/javascript"></script>
+<script src="@routes.Assets.at("javascripts/GameObjectManager.js")" type="text/javascript"></script>
+<script src="@routes.Assets.at("javascripts/ApplicationManager.js")" type="text/javascript"></script>
+<script src="@routes.Assets.at("javascripts/Level.js")" type="text/javascript"></script>
+<script src="@routes.Assets.at("javascripts/VisualGameObject.js")" type="text/javascript"></script>
+<script src="@routes.Assets.at("javascripts/MainMenu.js")" type="text/javascript"></script>
+<script src="@routes.Assets.at("javascripts/AnimatedGameObject.js")" type="text/javascript"></script>
+<script src="@routes.Assets.at("javascripts/Main.js")" type="text/javascript"></script>
+<!--<script src="@routes.Assets.at("javascripts/prototype-1.6.0.3.js")" type="text/javascript"></script>-->
+<script src="@routes.Assets.at("javascripts/Utils.js")" type="text/javascript"></script>
+
 
 }
