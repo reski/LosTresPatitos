@@ -81,10 +81,10 @@ body {
 }
 
 #canvas {
-    //background-color: blue;
     position: relative;
-    left: 0px;
-
+    left: 50%;
+    border-image: url("../images/sandBorder.png") 30 30 stretch;
+    border-width: 20px;
 }
 
 #onChat {
