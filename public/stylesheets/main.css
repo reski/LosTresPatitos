@@ -76,7 +76,7 @@ body {
 
 #messages {
     height: 300px;
-    overflow: scroll;
+    overflow: auto
 
 }
 
@@ -89,7 +89,6 @@ body {
 
 #onChat {
     width: 30%;
-    float: right;
 }
 
 #talk {
