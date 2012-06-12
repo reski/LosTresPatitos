@@ -1,3 +1,8 @@
+@font-face {
+    font-family: pirate;
+    src: url('../images/RAPSCALL.TTF');
+}
+
 html, body {
 
 }
@@ -7,7 +12,7 @@ body {
     background-image: url("../images/wood.jpg");
     background-size: 100%;
 }
-}
+
 
 .container > footer p {
     text-align: center; /* center align it with the container */
@@ -65,6 +70,7 @@ body {
 
 #username {
     width: 200px;
+    margin-left: 100px;
 }
 
 #onError {
@@ -96,8 +102,10 @@ body {
     position: absolute;
     left: 70%;
     top: 15%;
-    background-image: url("../images/scrollBG.jpg");
+    background-image: url("../images/chatPaper.jpg");
     background-size: 100%;
+    padding: 55px 20px 20px 20px;
+    color: black;
 }
 
 #talk {
@@ -109,7 +117,6 @@ body {
 
 .message {
     padding: 4px 0;
-    border-bottom: 1px solid #eee;
     position: relative;
 }
 
@@ -128,7 +135,7 @@ body {
 .message p {
     display: inline-block;
     margin: 0;
-    width: 500px;
+    width: 350px;
 }
 
 .message.me {
@@ -227,3 +234,52 @@ body {
     left: 30%;
 
 }
+
+textarea{
+    border-color: transparent;
+    background-color: rgba(255, 255, 255, 0.15);
+    color: #f5f5f5;
+}
+
+textarea:focus {
+    /*leave input as label until focus */
+    border-color: transparent;
+    background-color: rgba(0, 0, 0, 0.35);
+
+}
+#buttons{
+
+width: 246px;
+position: absolute;
+left: 50%;
+margin-left: -123px;
+border: dotted;
+margin-top: 10px;
+}
+
+#logIn{
+
+    position: fixed;
+    left: 50%;
+    top: 40%;
+    z-index: 50;
+    width: 530px;
+    margin-left: -265px;
+    background-color:   rgba(0, 0, 0, 0.25);
+    border-radius: 5px;
+    box-shadow: 20px;
+    box-shadow: 5px 5px 5px  #141212;
+
+
+}
+
+#logIn h1{
+    font-family: pirate;
+    font-size: 74px;
+    color:   #381E1E;
+    margin-bottom: 30px;
+
+}
+
+
+

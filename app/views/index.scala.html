@@ -13,10 +13,28 @@
 }
 
 <div class="alert-message block-message info">
-    <p>
-        <strong>YO WELCOME TO THE BATTLE ARENA </strong>
-        To start, put yo name in da box!
-    </p>
 </div>
+
+
+<div id="logIn">
+    <h1>Los Tres Patitos !</h1>
+    <form class ="" action="@routes.Application.battleRoom()" >
+        <input id="username" name="username" class="input-xlarge" type="text" placeholder="Username">
+        <button class="btn" type="submit">Sign in</button>
+    </form>
+
+</div>
+
+<style type="text/css">
+
+    body{
+
+    background-image: url("@routes.Assets.at("images/sexyback3.jpg")");
+    background-size: 100%;
+    }
+
+
+
+</style>
 
 }
