@@ -1,9 +1,6 @@
 @(username : String , welcomeText: (String,List[String],String))
 @main(Some(username)) {
 
-<div class="page-header">
-    <h1>Battle Room<small>You are battling as @username</small></h1>
-</div>
 
 <div id="onError" class="alert-message error">
     <p>
@@ -11,8 +8,6 @@
     </p>
 </div>
 
-<div class="row-fluid">
-    <div class="span7">
         <canvas id="canvas" width="900" height="500">
             <p>
                 SERIOUSLY INTERNET EXPLORER?!?!?!?!?!?!?!?
@@ -22,7 +17,7 @@
 
             </p>
         </canvas>
-    </div>
+
 
     <div id="onChat" class="">
         <div id="memberGroup" class="">
@@ -47,7 +42,7 @@
         <button class="btn" onclick="g_GameObjectManager.ocean.makeItRain()"> Make It Rain </button>
 
     </div>
-</div>
+
 <div id = "popUpBack">
 
     <div id= "strategy">
