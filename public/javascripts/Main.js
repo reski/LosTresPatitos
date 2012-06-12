@@ -47,3 +47,12 @@ this.init =function(socket)
 function leavingPage(){
 
 }
+function findClick(evt){
+
+        var pos =  new Object();
+        canoffset = $("canvas").offset();
+        pos.x = (event.clientX + document.body.scrollLeft + document.documentElement.scrollLeft - Math.floor(canoffset.left))-20;
+        pos.y = (event.clientY + document.body.scrollTop + document.documentElement.scrollTop - Math.floor(canoffset.top)) -39;
+
+        return pos;
+}

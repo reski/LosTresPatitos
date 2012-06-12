@@ -58,12 +58,17 @@ var ripple = (function(img_src, canvass){
 		ripple_data = ripple.data;
 		
 
-		canvas.addEventListener('mousemove', function( evt) {
-			disturb(evt.offsetX || evt.layerX, evt.offsetY || evt.layerY);
+		canvas.addEventListener('mousemove', function(evt) {
+			/*var x = (evt.offsetX || evt.layerX)-20;
+            var y =(evt.offsetY || evt.layerY) -20;*/
+            var pos =findClick(evt);
+			disturb(pos.x, pos.y);
 		}, false);
-		canvas.addEventListener('mousedown', function(/* Event */ evt) {
-        			disturb(evt.offsetX || evt.layerX, evt.offsetY || evt.layerY);
-        		}, false);
+		/*canvas.addEventListener('mousedown', function(*//* Event *//* evt) {
+        			var x = (evt.offsetX || evt.layerX)-20;
+        			var y =(evt.offsetY || evt.layerY) -20;
+        			disturb(x,y);
+        		}, false);*/
 		
 		start();
 	}

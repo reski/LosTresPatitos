@@ -112,8 +112,8 @@ function Level()
     }
     this.parseShot = function(x,y){
 
-          var posx = Math.floor(x/40);
-          var posy = Math.floor((y-20)/40);
+          var posx = Math.floor((x)/40);
+          var posy = Math.floor((y)/40);
           if((0 <= posx)&&(posx <=9)&&(posy <=9)&&(0 <=posy)){
        //   alert('x:'+ posx + 'y '+posy)
           g_Socket.send(JSON.stringify({
@@ -126,13 +126,8 @@ function Level()
          }
        }
        this.mouseDown = function(event){
-            var x, y;
-
-            canoffset = $("canvas").offset();
-            x = event.clientX + document.body.scrollLeft + document.documentElement.scrollLeft - Math.floor(canoffset.left);
-            y = event.clientY + document.body.scrollTop + document.documentElement.scrollTop - Math.floor(canoffset.top) + 1;
-
-          this.parseShot(x,y);
+          var pos =findClick(event);
+          this.parseShot(pos.x,pos.y);
         }
 
 
