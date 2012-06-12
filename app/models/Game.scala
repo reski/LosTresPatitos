@@ -48,17 +48,14 @@ class Game {
           players(player2).out.push(createJson("The Game has started. Your Move","BattleLord"))
           currentPlayer = player2
         }else{
-          players(player2).out.push(createJson("Oponent to Finished Strategy","BattleLord"))
+          players(player2).out.push(createJson("Waiting for Oponent to finish Strategy","BattleLord"))
         }
       }else if(username.equals(player2)){
         if (players(player1).strategySet){
           players(player2).out.push(createJson("The Game has started. Oponents Move","BattleLord"))
           players(player1).out.push(createJson("The Game has started. Your Move","BattleLord"))
           currentPlayer = player1
-        }else{
-          players(player1).out.push(createJson("Oponent to Finished Strategy","BattleLord"))
         }
-
       }
     }
   }
@@ -77,9 +74,9 @@ class Game {
     players(player1).out.push(json)
   }
 
-  def informOponentEntered() = {
+  def informOponentEntered(username:String) = {
 
-    if(player1!=""){
+    if(username.equals(player2) && players(player1) != null){
       players(player1).out.push(createJson("Waiting For Oponent to finish Strategy","BattleLord"))
     }
 

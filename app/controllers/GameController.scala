@@ -67,7 +67,6 @@ object GameController extends Controller {
       ("Waiting for chalenger", List(currentGame.player1),"game"+gameid)
     } else if (currentGame.player2 == "" && userName != currentGame.player1 ) {
       currentGame.player2 = userName
-      currentGame.informOponentEntered()
       ("Waiting for chalenger to Finish Strategy", List(currentGame.player2, currentGame.player1),"game"+gameid)
     }else if (currentGame.player1 != "" && currentGame.player2 != ""){
       currentGame = new Game

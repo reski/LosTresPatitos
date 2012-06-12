@@ -47,7 +47,7 @@ this.init =function(socket)
 function leavingPage(){
 
 }
-function findClick(evt){
+function findClick(event){
 
         var pos =  new Object();
         canoffset = $("canvas").offset();

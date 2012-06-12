@@ -94,12 +94,10 @@
     var autoPlay = false;
     var bot;
     var suggested;
-
+    var WS = window['MozWebSocket'] ? MozWebSocket : WebSocket
+    var chatSocket = new WS("ws://localhost:9000@routes.Application.connect(username,welcomeText._3)");
 
     $(function() {
-    var WS = window['MozWebSocket'] ? MozWebSocket : WebSocket
-
-    var chatSocket = new WS("ws://localhost:9000@routes.Application.connect(username,welcomeText._3)");
 
     new Main().init(chatSocket);
 
@@ -192,7 +190,7 @@
         if(data.action == "timer"){
         startTimer();
         }else{
-        defaultStrategy();
+        if(g_ApplicationManager.strategySet == false)defaultStrategy();
         }
        }
     }

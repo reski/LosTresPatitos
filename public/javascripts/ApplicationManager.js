@@ -7,7 +7,7 @@ function ApplicationManager()
 {
     this.canvasWidth = 0;
     this.canvasHeight = 0;
-
+    this.strategySet = false;
     /**
      Initialises this object
      @param canvasWidth      The width of the canvas
@@ -31,7 +31,7 @@ function ApplicationManager()
     {
 
         g_GameObjectManager.shutdownAll();
-
+        this.strategySet = true;
         g_GameObjectManager.ocean.init();
         this.grid = new Grid().startUp(0, 20);
         this.playerGrid = new Grid().startUp(410, 20);

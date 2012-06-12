@@ -49,15 +49,17 @@ object Application extends Controller {
       new Timer().schedule(new TimerTask(){
         def run(){
             out.push(JsObject(Seq("action" ->JsString("timer"))))
-            println("timer")
+            GameController.games(gameId).informOponentEntered(username)
+            //println("timer")
         }
-      }, 3000)
+      }, 2000)
       new Timer().schedule(new TimerTask(){
         def run(){
           out.push(JsObject(Seq("action" ->JsString("timerFinish"))))
-          println("timer finished")
+         // println("timer finished")
         }
       }, 43000)
+      println("chatSocker for"+ username)
       (in, out)
   }
 
