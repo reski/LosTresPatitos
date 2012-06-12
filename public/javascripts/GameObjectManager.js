@@ -112,9 +112,9 @@ function GameObjectManager()
               g_ApplicationManager.level.mouseDown(event);
 
         }
-        this.canvas.onmouseover = function(event) {
-              g_ApplicationManager.grid.onmouseover(event);
-              g_ApplicationManager.playerGrid.onmouseover(event);
+        this.canvas.onmousemove= function(event) {
+              g_ApplicationManager.grid.onmousemove(event);
+              g_ApplicationManager.playerGrid.onmousemove(event);
 
 
          }

@@ -17,14 +17,17 @@ this.update = function (/**Number*/ dt, /**CanvasRenderingContext2D*/context, /*
 
  }
 
-this.onmouseover = function(event) {
+this.onmousemove = function(event) {
                var ex, ey;
                canoffset = $("canvas").offset();
                ex = event.clientX + document.body.scrollLeft + document.documentElement.scrollLeft - Math.floor(canoffset.left);
                ey = event.clientY + document.body.scrollTop + document.documentElement.scrollTop - Math.floor(canoffset.top) + 1;
 
-               if((ex> this.x && ex< this.x+400) && (ey>this.y && ey<this.y+400)){this.hidden = false;
-               }else{this.hidden = true}
+               if((ex> this.x && ex< this.x+this.image.width) && (ey>this.y && ey<this.y+this.image.height)){
+                     this.hidden = false;
+               }else{
+                    this.hidden = true;
+                    }
             }
 
 
