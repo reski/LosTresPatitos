@@ -57,7 +57,7 @@ object Application extends Controller {
           out.push(JsObject(Seq("action" ->JsString("timerFinish"))))
           println("timer finished")
         }
-      }, 18000)
+      }, 43000)
       (in, out)
   }
 

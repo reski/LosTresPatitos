@@ -62,7 +62,7 @@
             </p>
         </canvas>
         <button id="strategyButton" onclick="getChildrenPos()"> </button>
-        <input type="text" id="strategyTimer" disabled>timer</button>
+        <button id="strategyTimer"> 40 </button>
         <button id="strategyButtonCancel" onclick="toggleAlert('alert')"> </button>
 
 
@@ -185,6 +185,7 @@
     g_ApplicationManager.openEnd(data.finishedGame);
     autoPlay = false;
     }
+
     if(data.action){
         if(data.action == "timer"){
         startTimer();
@@ -192,8 +193,7 @@
         defaultStrategy();
         }
        }
-
-    };
+    }
 
 
     var handleReturnKey = function(e) {
