@@ -44,6 +44,7 @@
         <textarea id="talk" ></textarea>
         <button class="btn btn-inverse" onclick="toggleAutoPlay()"> Autoplay !</button>
         <button class="btn" onclick="g_ApplicationManager.level.echo()"> Echo !</button>
+        <button class="btn" onclick="g_GameObjectManager.ocean.makeItRain()"> Make It Rain </button>
 
     </div>
 </div>
@@ -62,6 +63,7 @@
         </canvas>
         <button id="strategyButton" onclick="getChildrenPos()"> </button>
         <button id="strategyButtonCancel" onclick="toggleAlert('alert')"> </button>
+
 
     </div>
 </div>
@@ -246,6 +248,7 @@
 <script src="@routes.Assets.at("javascripts/easeljs-0.4.2.min.js")" type="text/javascript"></script>
 <script src="@routes.Assets.at("javascripts/StrategyManager.js")" type="text/javascript"></script>
 <script src="@routes.Assets.at("javascripts/CannonBall.js")" type="text/javascript"></script>
+<script src="@routes.Assets.at("javascripts/Ocean.js")" type="text/javascript"></script>
 
 
 

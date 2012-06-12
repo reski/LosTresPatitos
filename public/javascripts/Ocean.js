@@ -1,5 +1,7 @@
-
-var ripple = (function(img_src, canvass){
+function Ocean(img_src){
+	var draw = false;
+	var still = 0;
+	var doRain = false;
 	var img = new Image,
 		img_data,
 		delay = 30,
@@ -22,7 +24,7 @@ var ripple = (function(img_src, canvass){
 		is_running = true,
 		is_disturbed = false,
 		timer_id,
-		canvas = canvass,
+		canvas = g_GameObjectManager.canvas,
 		//canvas = document.createElement('canvas'),
 		/** @type {CanvasRenderingContext2D} */
 		ctx;
@@ -34,19 +36,17 @@ var ripple = (function(img_src, canvass){
 		half_width = width >> 1;
 		half_height = height >> 1;
 		
-		size = width * (height + 2) * 2;
-		
-		canvas.width = width;
-		canvas.height = height;
+		size = width * (height + 2) * 5;
 		
 		oldind = width;
 		newind = width * (height + 3);
 		
 		/** @type {CanvasRenderingContext2D} */
-		ctx = canvas.getContext('2d');
+		ctx = g_GameObjectManager.backBufferContext2D;
 		//container.appendChild(canvas);
 		
 	    ctx.drawImage(img, 0, 0, width, height);
+
 		//ctx.draw
 		for (var i = 0; i < size; i++) {
 			last_map[i] = ripplemap[i] = 0;
@@ -57,42 +57,61 @@ var ripple = (function(img_src, canvass){
 		ripple = ctx.getImageData(0, 0, width, height);
 		ripple_data = ripple.data;
 		
-
 		canvas.addEventListener('mousemove', function( evt) {
 			disturb(evt.offsetX || evt.layerX, evt.offsetY || evt.layerY);
 		}, false);
-		canvas.addEventListener('mousedown', function(/* Event */ evt) {
-        			disturb(evt.offsetX || evt.layerX, evt.offsetY || evt.layerY);
-        		}, false);
+		/*canvas.addEventListener('mousedown',click(evt), false);*/
 		
 		start();
 	}
+	function click(x, y) {
+    		            riprad =25;
+            			disturb(x, y);
+            		    riprad = 5;
+            		}
 	
 	function stop() {
-		if (timer_id)
-			clearInterval(timer_id);
+		g_GameObjectManager.ocean.draw =false;
+	}
+	function makeItRain(){
+	   if(doRain){doRain= false;
+	   }else{ doRain= true;}
 	}
 	
 	function start() {
-		stop();
-		timer_id = setInterval(run, delay);
-		setInterval(rain,200);
+	    draw = true;
 	}
 	function rain(){
 	    disturb(Math.round(Math.random()*width),Math.round(Math.random()*width))
 	    newframe(width,height)
 	    ctx.putImageData(ripple,0,0)
 	}
-	
-	function run() {
-		if (is_disturbed) {
-			newframe(width, height);
-			ctx.putImageData(ripple, 0, 0);
-		}
+	function moving(){
 
+        for(var i = 0; i<10 ; i++){
+	    var x =Math.round(Math.random()*width);
+	    for (var y = 0; y< height; y = y+50){
+	     disturb(x,y)
+        }
+         newframe(width,height)
+         ctx.putImageData(ripple,0,0)
 
+        }
 	}
 	
+	function update() {
+		if(draw){
+		   if(doRain){
+		    rain();
+		   }
+		    ctx.drawImage(img, 0, 0, width, height)
+		    if (is_disturbed) {
+			    newframe(width, height);
+			    ctx.putImageData(ripple, 0, 0);
+
+       }
+	}
+	}
 	function disturb(dx, dy) {
 		dx <<= 0;
 		dy <<= 0;
@@ -107,6 +126,8 @@ var ripple = (function(img_src, canvass){
 //		newframe(width, height);
 //		ctx.putImageData(ripple, 0, 0);
 	}
+
+
 	
 	function newframe() {
 		var i, a, b, data, cur_pixel, new_pixel, old_data;
@@ -180,13 +201,15 @@ var ripple = (function(img_src, canvass){
 		is_disturbed = _is_disturbed;
 	}
 	
-	img.onload = initwater;
 	img.src = img_src;
 	
 	return {
 	    init : initwater,
 		start: start,
 		stop: stop,
+		bomb: click,
+		makeItRain: makeItRain,
+		update: update,
 		disturb: disturb
 	}
-});
+};

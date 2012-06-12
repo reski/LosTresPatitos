@@ -17,14 +17,16 @@ this.update = function (/**Number*/ dt, /**CanvasRenderingContext2D*/context, /*
    //this.timer = this.timer -dt;
    if(this.currentFrame == 21){
    this.shutdownAnimatedGameObject();
+
    this.paintResult();
+
    }
 
 
 
  }
 this.paintResult =function(){
-
+      g_GameObjectManager.ocean.bomb(this.x+20, this.y+20);
     switch(this.shotResult)
         {
         case "miss":
@@ -37,6 +39,7 @@ this.paintResult =function(){
           new AnimatedGameObject().startupAnimatedGameObject(g_ResourceManager.explosion, this.x+ 3, this.y +5,4,14,14);
           break;
        }
+
 }
 
 

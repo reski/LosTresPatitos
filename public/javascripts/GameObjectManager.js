@@ -70,6 +70,7 @@ function GameObjectManager()
 
 
    this.dt = 0;
+   this.ocean = null;
 
     /**
      Initialises this object
@@ -170,9 +171,7 @@ function GameObjectManager()
                     {name: 'metal', src: '/assets/images/metal.png'},
                     {name: 'fire', src: '/assets/images/fire.png'},
                     {name: 'cannonBall', src: '/assets/images/cannonballsplash.png'},
-
-
-
+                    {name: 'ocean', src: '/assets/images/ocean2.jpg'}
 
                 ]);
 
@@ -180,7 +179,7 @@ function GameObjectManager()
         // use setInterval to call the draw function
         setInterval(function() {
             g_GameObjectManager.draw();
-        }, SECONDS_BETWEEN_FRAMES);
+        }, SECONDS_BETWEEN_FRAMES );
 
         return this;
     }
@@ -212,6 +211,8 @@ function GameObjectManager()
             {
 
                 new ApplicationManager().startupApplicationManager(this.canvas.width, this.canvas.height);
+                this.ocean = new Ocean(g_ResourceManager.ocean.src);
+
                 this.resourcesLoaded = true;
             }
             else
@@ -237,51 +238,32 @@ function GameObjectManager()
         if (this.canvasSupported && this.resourcesLoaded)
         {
             this.backBufferContext2D.clearRect(0, 0, this.backBuffer.width, this.backBuffer.height);
-            //this.sideBufferContext2D.clearRect(600, 0, this.sideBuffer.width, this.sideBuffer.height);
-            //this.botBufferContext2D.clearRect(0, 400, this.botBuffer.width, this.botBuffer.height);
-
             this.addNewGameObjects();
             this.removeOldGameObjects();
-
             // first update all the game objects
             for (var x = 0; x < this.gameObjects.length; ++x)
             {
                 if (this.gameObjects[x].update)
                 {
-
                     this.gameObjects[x].update(this.dt, this.backBufferContext2D, this.xScroll, this.yScroll);
-
                 }
-
-                if (this.gameObjects[x].updatePos) {
+             /*   if (this.gameObjects[x].updatePos) {
                     this.gameObjects[x].updatePos();
-                }
-
-
+                }*/
             }
-
             this.removeOldGameObjects();
-
+            if(this.ocean)this.ocean.update();
             // then draw the game objects
             for (var x = 0; x < this.gameObjects.length; ++x)
             {
-
-
-
                this.gameObjects[x].draw(this.dt, this.backBufferContext2D, this.xScroll, this.yScroll);
-
-
-
-
             }
-
-
-
-
         }
 
         this.context2D.clearRect(0, 0, this.backBuffer.width, this.backBuffer.height);
         this.context2D.drawImage(this.backBuffer, 0, 0);
+
+
 
 
 

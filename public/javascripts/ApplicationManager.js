@@ -32,10 +32,9 @@ function ApplicationManager()
 
         g_GameObjectManager.shutdownAll();
 
-
-        this.backgroundOponent = new AnimatedGameObject().startupAnimatedGameObject(g_ResourceManager.water, 0, 20, 0,10,15);
+        g_GameObjectManager.ocean.init();
         this.grid = new VisualGameObject().startupVisualGameObject(g_ResourceManager.grid, 0, 20, 1);
-        this.backgroundPlayer = new AnimatedGameObject().startupAnimatedGameObject(g_ResourceManager.water, 410, 20, 0,10,15);
+        //this.backgroundPlayer = new AnimatedGameObject().startupAnimatedGameObject(g_ResourceManager.water, 410, 20, 0,10,15);
         this.playerGrid = new VisualGameObject().startupVisualGameObject(g_ResourceManager.grid, 410, 20, 1);
 
         if(def) this.level= new Level().startUpDefault();
