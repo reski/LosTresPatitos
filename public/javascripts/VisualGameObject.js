@@ -9,9 +9,10 @@ function VisualGameObject()
      */
     this.image = null;
 
-    this.button = false;
+   /* this.button = false;
     this.item = false;
-
+*/
+    this.hidden = false
     /**
      Draws this element to the back buffer
      @param dt Time in seconds since the last frame
@@ -21,7 +22,8 @@ function VisualGameObject()
      */
     this.draw = function(/**Number*/ dt, /**CanvasRenderingContext2D*/ context, /**Number*/ xScroll, /**Number*/ yScroll)
     {   try{
-            context.drawImage(this.image, this.x - xScroll, this.y - yScroll);
+
+           if(this.hidden != true) context.drawImage(this.image, this.x - xScroll, this.y - yScroll);
         } catch(e){
 
             this.image.onload = function(){

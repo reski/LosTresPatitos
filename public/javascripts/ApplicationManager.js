@@ -33,9 +33,9 @@ function ApplicationManager()
         g_GameObjectManager.shutdownAll();
 
         g_GameObjectManager.ocean.init();
-        this.grid = new VisualGameObject().startupVisualGameObject(g_ResourceManager.grid, 0, 20, 1);
+        this.grid = new Grid().startUp(0, 20);
         //this.backgroundPlayer = new AnimatedGameObject().startupAnimatedGameObject(g_ResourceManager.water, 410, 20, 0,10,15);
-        this.playerGrid = new VisualGameObject().startupVisualGameObject(g_ResourceManager.grid, 410, 20, 1);
+        this.playerGrid = new Grid().startUp(410, 20);
 
         if(def) this.level= new Level().startUpDefault();
         else this.level = new Level().startupLevel(this.canvasWidth, this.canvasHeight,ships);

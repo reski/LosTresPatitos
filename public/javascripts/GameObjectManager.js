@@ -85,11 +85,11 @@ function GameObjectManager()
         g_GameObjectManager = this;
 
         // watch for keyboard events
-        document.onkeydown = function(event) {
+       /* document.onkeydown = function(event) {
 
 
 
-        };
+        };*/
         document.onkeyup = function(event) {
             g_GameObjectManager.keyUp(event);
 
@@ -100,12 +100,10 @@ function GameObjectManager()
 
 
         }
-        document.onmouseup = function(event) {
+        /*document.onmouseup = function(event) {
 
-        }
-        document.onmousemove = function(event) {
+        }*/
 
-        }
 
         // get references to the canvas elements and their 2D contexts
         this.canvas = document.getElementById('canvas');
@@ -114,6 +112,12 @@ function GameObjectManager()
               g_ApplicationManager.level.mouseDown(event);
 
         }
+        this.canvas.onmouseover = function(event) {
+              g_ApplicationManager.grid.onmouseover(event);
+              g_ApplicationManager.playerGrid.onmouseover(event);
+
+
+         }
 
         // if the this.canvas.getContext function does not exist it is a safe bet that
         // the current browser does not support the canvas element.
