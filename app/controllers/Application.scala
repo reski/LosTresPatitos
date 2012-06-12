@@ -2,9 +2,10 @@ package controllers
 
 import play.api._
 import libs.iteratee.{PushEnumerator, Enumerator, Iteratee}
-import libs.json.{JsValue}
+import libs.json.{JsString, JsObject, JsValue}
 import play.api.mvc._
 import com.codahale.jerkson.Json
+import java.util.{TimerTask, Timer}
 
 object Application extends Controller {
 
@@ -45,6 +46,18 @@ object Application extends Controller {
       val out: PushEnumerator[JsValue] = Enumerator.imperative[JsValue]()
       val in = Iteratee.foreach[JsValue] { json => GameController.parse(username,gameId, json)}
       GameController.addPlayer(username,gameId, out)
+      new Timer().schedule(new TimerTask(){
+        def run(){
+            out.push(JsObject(Seq("action" ->JsString("timer"))))
+            println("timer")
+        }
+      }, 3000)
+      new Timer().schedule(new TimerTask(){
+        def run(){
+          out.push(JsObject(Seq("action" ->JsString("timerFinish"))))
+          println("timer finished")
+        }
+      }, 18000)
       (in, out)
   }
 

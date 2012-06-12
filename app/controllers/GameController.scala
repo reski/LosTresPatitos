@@ -53,6 +53,7 @@ object GameController extends Controller {
 
   def addPlayer(s: String,gameId :String, out: PushEnumerator[JsValue]) = {
     games(gameId).addPlayer(s, out)
+
     //game.startingMessage(s);
 
   }
