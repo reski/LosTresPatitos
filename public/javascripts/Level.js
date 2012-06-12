@@ -3,15 +3,7 @@
  */
 function Level()
 {
-   /*this.ship1b = new Array(200, 40, 3,280,-10,3);
-   this.ship2b = new Array(155, 160, 3);
-   this.ship3b = new Array(0, 220, 3, 280,100,3);
-   this.ship4b = new Array(200, 300, 3);*/
 
-  /* this.ship1 = new Array(815,0, 3);
-   this.ship2 = new Array(815,45, 3);
-   this.ship3 = new Array(815, 125 , 3);
-   this.ship4 = new Array(815, 170, 3);*/
      this.lastX = null;
      this.lastY = null;
     /**
@@ -93,7 +85,6 @@ function Level()
 
     }
 
-                           
     /**
      Adds the blocks to the screen by creating VisualGameObjects
      */
