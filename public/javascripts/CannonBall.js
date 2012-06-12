@@ -15,6 +15,10 @@ this.update = function (/**Number*/ dt, /**CanvasRenderingContext2D*/context, /*
         /**Number*/ yScroll)
  {
    //this.timer = this.timer -dt;
+   if(this.currentFrame ==14){
+    g_GameObjectManager.ocean.bomb(this.x+20, this.y+20);
+   }
+
    if(this.currentFrame == 21){
    this.shutdownAnimatedGameObject();
 
@@ -26,7 +30,7 @@ this.update = function (/**Number*/ dt, /**CanvasRenderingContext2D*/context, /*
 
  }
 this.paintResult =function(){
-      g_GameObjectManager.ocean.bomb(this.x+20, this.y+20);
+
     switch(this.shotResult)
         {
         case "miss":
