@@ -62,6 +62,7 @@
             </p>
         </canvas>
         <button id="strategyButton" onclick="getChildrenPos()"> </button>
+        <input type="text" id="strategyTimer" disabled>timer</button>
         <button id="strategyButtonCancel" onclick="toggleAlert('alert')"> </button>
 
 
@@ -186,13 +187,11 @@
     }
     if(data.action){
         if(data.action == "timer"){
-
-    }else{
-
-     defaultStrategy();
-
-    }
-
+        startTimer();
+        }else{
+        defaultStrategy();
+        }
+       }
 
     };
 

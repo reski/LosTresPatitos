@@ -5,7 +5,8 @@ var mouseTarget;	// the display object currently under the mouse, or being dragg
 var dragStarted;	// indicates whether we are currently in a drag operation
 var offset = new Point();
 var update = true;
-var timer = 20;
+var timer = 30;
+var timerDiplay = document.getElementById("timerDisplay")
 
 function init() {
     if (window.top != window) {
@@ -246,4 +247,15 @@ function parsePositions(children){
     return newShips;
 
 }
+function startTimer(){
+    setInterval(function() {
+               timer--;
+               updateTimer();
+           }, 1000);
+}
+function updateTimer(){
+
+
+}
+
 
