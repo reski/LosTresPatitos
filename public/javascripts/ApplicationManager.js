@@ -33,8 +33,12 @@ function ApplicationManager()
         g_GameObjectManager.shutdownAll();
 
 
-        this.background = new VisualGameObject().startupVisualGameObject(g_ResourceManager.favicon, 0, 0, 0);
-        //this.level = new Level().startupLevel(this.canvasWidth, this.canvasHeight,);
+        this.backgroundOponent = new AnimatedGameObject().startupAnimatedGameObject(g_ResourceManager.water, 0, 0, 0,10,15);
+        this.grid = new VisualGameObject().startupVisualGameObject(g_ResourceManager.grid, 0, 0, 1);
+        this.backgroundPlayer = new AnimatedGameObject().startupAnimatedGameObject(g_ResourceManager.water, 0, 410, 0,10,15);
+
+
+        this.level = new Level().startupLevel(this.canvasWidth, this.canvasHeight);
 
 
 

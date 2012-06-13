@@ -44,7 +44,7 @@ object GameController extends Controller {
 
 
   def checkIfGameAvailable(userName: String): (String,List[String]) = {
-    if (game.player1 == "") {
+    if (game.player1 != null) {
       game.player1 = userName
       ("Waiting for chalenger",List(game.player1))
     } else if (game.player2 == "") {

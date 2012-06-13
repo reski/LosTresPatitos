@@ -3,7 +3,15 @@
  */
 function Level()
 {
+   this.ship1b = new Array(200, 40, 3,280,-10,3);
+   this.ship2b = new Array(155, 160, 3);
+   this.ship3b = new Array(0, 220, 3, 280,100,3);
+   this.ship4b = new Array(200, 300, 3);
 
+   this.ship1 = new Array(200, 450, 3,300,400,3);
+   this.ship2 = new Array(100, 550, 3);
+   this.ship3 = new Array(0, 600, 3, 300,500,3);
+   this.ship4 = new Array(200, 700, 3);
 
     /**
      Initialises this object
@@ -11,7 +19,16 @@ function Level()
     this.startupLevel = function(canvasWidth, canvasHeight/*, Json boatPosition*/)
     {
 
-       // this.addVisualObject(g_ResourceManager.horse, this.horse);
+        this.addVisualObject(g_ResourceManager.ship1bad, this.ship1b);
+        this.addVisualObject(g_ResourceManager.ship2bad, this.ship2b);
+        this.addVisualObject(g_ResourceManager.ship3bad, this.ship3b);
+        this.addVisualObject(g_ResourceManager.ship4bad, this.ship4b);
+
+        this.addVisualObject(g_ResourceManager.ship1good, this.ship1);
+        this.addVisualObject(g_ResourceManager.ship2good, this.ship2);
+        this.addVisualObject(g_ResourceManager.ship3good, this.ship3);
+        this.addVisualObject(g_ResourceManager.ship4good, this.ship4);
+
 
 
         return this;

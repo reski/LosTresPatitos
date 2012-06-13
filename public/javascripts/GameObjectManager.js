@@ -137,6 +137,17 @@ function GameObjectManager()
                 [
                     {name: 'favicon', src: '/assets/images/favicon.png'},
                     {name: 'main', src: '/assets/images/main.jpg'},
+                    {name: 'water', src: '/assets/images/water.png'},
+                    {name: 'ship1good', src: '/assets/images/ship1good.png'},
+                    {name: 'ship2good', src: '/assets/images/ship2good.png'},
+                    {name: 'ship3good', src: '/assets/images/ship3good.png'},
+                    {name: 'ship4good', src: '/assets/images/ship4good.png'},
+                    {name: 'ship1bad', src: '/assets/images/ship1bad.png'},
+                    {name: 'ship2bad', src: '/assets/images/ship2bad.png'},
+                    {name: 'ship3bad', src: '/assets/images/ship3bad.png'},
+                    {name: 'ship4bad', src: '/assets/images/ship4bad.png'},
+                    {name: 'grid', src: '/assets/images/grid.png'},
+
 
 
                 ]);
@@ -245,7 +256,7 @@ function GameObjectManager()
 
         }
 
-
+        this.context2D.clearRect(0, 0, this.backBuffer.width, this.backBuffer.height);
         this.context2D.drawImage(this.backBuffer, 0, 0);
 
 
