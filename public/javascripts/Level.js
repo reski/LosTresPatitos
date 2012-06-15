@@ -8,10 +8,10 @@ function Level()
    this.ship3b = new Array(0, 220, 3, 280,100,3);
    this.ship4b = new Array(200, 300, 3);
 
-   this.ship1 = new Array(200, 450, 3,300,400,3);
-   this.ship2 = new Array(100, 550, 3);
-   this.ship3 = new Array(0, 600, 3, 300,500,3);
-   this.ship4 = new Array(200, 700, 3);
+   this.ship1 = new Array(450,200, 3,400,300,3);
+   this.ship2 = new Array(550, 100, 3);
+   this.ship3 = new Array(600, 0 , 3, 500,300,3);
+   this.ship4 = new Array(700, 200, 3);
 
     /**
      Initialises this object

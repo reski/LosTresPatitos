@@ -12,7 +12,7 @@
 </div>
 
 
-    <canvas id="canvas" width="500" height="850">
+    <canvas id="canvas" width="850" height="500">
         <p>
             SERIOUSLY INTERNET EXPLORER?!?!?!?!?!?!?!?
             Come on! download a real browser that has the canvas element,
@@ -48,7 +48,7 @@
     $(function() {
     var WS = window['MozWebSocket'] ? MozWebSocket : WebSocket
 
-    var chatSocket = new WS("ws://localhost:9000@routes.Application.connect(username)")
+    var chatSocket = new WS("ws://localhost:9000@routes.Application.connect(username)");
 
 
 
@@ -88,14 +88,14 @@
 
     var handleReturnKey = function(e) {
     if(e.charCode == 13 || e.keyCode == 13) {
-    e.preventDefault()
-    sendMessage()
+    e.preventDefault();
+    sendMessage();
     }
     }
 
     $("#talk").keypress(handleReturnKey)
 
-    chatSocket.onmessage = receiveEvent
+    chatSocket.onmessage = receiveEvent;
 
     })
 
