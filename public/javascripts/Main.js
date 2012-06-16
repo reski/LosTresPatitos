@@ -30,7 +30,6 @@ var g_Socket = null;
 // The entry point of the application is set to the init function
 //window.onload = init;
 window.onbeforeunload = leavingPage;
-window.onload = init;
 
 /**
  Application entry point

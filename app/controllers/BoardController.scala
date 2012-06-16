@@ -12,12 +12,7 @@ object BoardController extends Controller {
     val position = tileId.split(",").map {
       s => s.toInt
     }
-    board.shoot(position {0}, position {1}) match {
-      case ShootResult.Missed => {}
-      case ShootResult.HitShip => {}
-      case ShootResult.SunkShip => {}
-      case ShootResult.AlreadyFired => {}
-    }
+
   }
 
 }

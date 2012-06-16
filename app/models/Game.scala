@@ -14,13 +14,20 @@ class Game {
 
 
 
-  def addPlayer(username: String, out: PushEnumerator[JsValue]) = {
-    var player: Player = new Player();
+  def addPlayer(username: String, out: PushEnumerator[JsValue])={
+    val player: Player = new Player();
     player.out = out;
+    player.board = Board.defaultBoard();
     players += (username -> player)
+
+  }
+
+  def shoot(username: String, x: Int, y: Int) = {
+    players{username}.board.shoot(x,y)
 
 
   }
+
   def chat(name :String,text: String) ={
     val json: JsValue = createJson(text, name)
     players{player2}.out.push(json)

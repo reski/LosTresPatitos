@@ -4,8 +4,8 @@ import play.api._
 import libs.iteratee.PushEnumerator
 import libs.json.JsValue
 import play.api.mvc._
-import models.{Game, Tile}
 import scala.Predef._
+import models.{ShootResult, Game, Tile}
 
 object GameController extends Controller {
 
@@ -27,7 +27,13 @@ object GameController extends Controller {
 
     if(x != -1 && y != -1){
     if (username.equals(currentPlayer)) {
-      game.calculateShot(username,x,y);
+        game.shoot(username,x,y) match {
+        case ShootResult.Missed => {println("Missed")}
+        case ShootResult.HitShip => {println("Hitship")}
+        case ShootResult.SunkShip => {println("Sunkship")}
+        case ShootResult.AlreadyFired => {}
+      }
+
       if(currentPlayer.equals(game.player1)){
        currentPlayer = game.player2;
       }else{
