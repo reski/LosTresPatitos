@@ -2,7 +2,8 @@ package models
 
 
 
-case class Board(tiles:List[List[Tile]]) {
+case class Board() {
+  var tiles : List[List[Tile]] = null;
 
   def shoot(x:Int, y:Int) ={
     val tile = tiles{x}{y}
