@@ -1,5 +1,7 @@
 package models
 
+
+
 case class Board(tiles:List[List[Tile]]) {
 
   def shoot(x:Int, y:Int) ={
@@ -16,20 +18,19 @@ case class Board(tiles:List[List[Tile]]) {
 
   }
 
-}
-
-object Board {
-
   def createBoard: List[List[Tile]] = {
     var lists: List[List[Tile]] = List[List[Tile]]()
     for (i <- 1 until 10) {
       var row: List[Tile] = List[Tile]()
       for (j <- 1 until 10) {
-        row = Tile("" + i + "," + j, null, false) :: row
+        row = Tile(i + "," + j, SmallShip, false) :: row
       }
       lists = row :: lists
     }
     lists
   }
+
 }
+
+
 

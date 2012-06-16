@@ -15,14 +15,19 @@ object GameController extends Controller {
 
 
   def parse(username: String, shot: JsValue) = {
-
+    println("llega")
     println("shot: "+ shot.toString()+ "by :" + username)
     val text: String = (shot \ "text").as[String]
+    val x: Int = (shot \ "cordx").as[Int]
+    val y: Int = (shot \ "cordy").as[Int]
 
+    if(!text.equals("")){
+       game.chat(username,text);
+    }
 
-
+    if(x != -1 && y != -1){
     if (username.equals(currentPlayer)) {
-      game.calculateShot(username);
+      game.calculateShot(username,x,y);
       if(currentPlayer.equals(game.player1)){
        currentPlayer = game.player2;
       }else{
@@ -33,7 +38,7 @@ object GameController extends Controller {
       game.notYourTurn(username);
     }
 
-
+    }
   }
 
   def addPlayer(s: String, out: PushEnumerator[JsValue]) = {
@@ -44,7 +49,7 @@ object GameController extends Controller {
 
 
   def checkIfGameAvailable(userName: String): (String,List[String]) = {
-    if (game.player1 != null) {
+    if (game.player1 =="") {
       game.player1 = userName
       ("Waiting for chalenger",List(game.player1))
     } else if (game.player2 == "") {

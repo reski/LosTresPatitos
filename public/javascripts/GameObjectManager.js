@@ -91,12 +91,11 @@ function GameObjectManager()
         };
         document.onkeyup = function(event) {
             g_GameObjectManager.keyUp(event);
+
         }
 
         document.onmousedown = function(event) {
             g_GameObjectManager.onmousedown(event);
-
-
 
 
         }
@@ -109,6 +108,11 @@ function GameObjectManager()
 
         // get references to the canvas elements and their 2D contexts
         this.canvas = document.getElementById('canvas');
+
+        this.canvas.onmousedown = function(event){
+              g_ApplicationManager.mouseDown(event);
+
+        }
 
         // if the this.canvas.getContext function does not exist it is a safe bet that
         // the current browser does not support the canvas element.

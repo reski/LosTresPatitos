@@ -7,39 +7,50 @@ import scala.Predef._
 class Game {
 
 
+
   var player1: String = "";
   var player2: String = "";
-  var players = Map.empty[String, PushEnumerator[JsValue]]
-  var boards = Map.empty[String, Board]
+  var players = Map.empty[String, Player]
+
 
 
   def addPlayer(username: String, out: PushEnumerator[JsValue]) = {
-    players += (username -> out)
+    var player: Player = new Player();
+    player.out = out;
+    players += (username -> player)
 
 
   }
+  def chat(name :String,text: String) ={
+    val json: JsValue = createJson(text, name)
+    players{player2}.out.push(json)
+    players {player1}.out.push(json)
+
+
+  }
+
   def startingMessage (username : String) = {
     if (username.equals(player2)){
-      players{player1}.push(createJson("The Game has started. Oponents Move","BattleLord"))
+      players{player1}.out.push(createJson("The Game has started. Oponents Move","BattleLord"))
   }
   }
 
-  def calculateShot(s: String) = {
+  def calculateShot(s: String,x: Int, y:Int) = {
 
-    players {s}.push(createJson("nice shot","BattleLord"))
+    players{s}.out.push(createJson("nice shot","BattleLord"))
     if (player1.equals(s)) {
-       players {player2}.push(createJson("your getting shot","BattleLord"))
+       (players{player2}.out).push(createJson("your getting shot","BattleLord"))
 
 
     } else {
-       players {player1}.push(createJson("your getting shot","BattleLord"))
+       players {player1}.out.push(createJson("your getting shot","BattleLord"))
     }
 
 
   }
 
   def notYourTurn(s: String) = {
-    players {s}.push(createJson("not your turn sonny","BattleLord"))
+    players {s}.out.push(createJson("not your turn sonny","BattleLord"))
   }
 
   def createJson(msg: String, user:String): JsValue ={

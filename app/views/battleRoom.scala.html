@@ -50,11 +50,13 @@
 
     var chatSocket = new WS("ws://localhost:9000@routes.Application.connect(username)");
 
-
+    new Main().init(chatSocket);
 
     var sendMessage = function() {
                  chatSocket.send(JSON.stringify(
-                    {text: $("#talk").val()}
+                    {text: $("#talk").val(),
+                     cordx: -1,
+                     cordy: -1 }
                    ));
                  $("#talk").val('');
                  }

@@ -54,11 +54,26 @@ function ApplicationManager()
     }
 
     this.parseShot = function(x,y){
-         alert("x: "+ Math.floor(x/40));
-         alert("y: "+ Math.floor(y/40));
 
+       var posx = Math.floor(x/40);
+       var posy = Math.floor(y/40);
+
+       g_Socket.send(JSON.stringify({
+                        text: "",
+                        cordx : posx,
+                        cordy : posy
+                        }
+                          ));
 
     }
+    this.mouseDown = function(event){
+         var x, y;
 
+         canoffset = $("canvas").offset();
+         x = event.clientX + document.body.scrollLeft + document.documentElement.scrollLeft - Math.floor(canoffset.left);
+         y = event.clientY + document.body.scrollTop + document.documentElement.scrollTop - Math.floor(canoffset.top) + 1;
+
+       this.parseShot(x,y);
+     }
 
 }
