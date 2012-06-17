@@ -31,10 +31,11 @@ object GameController extends Controller {
         case ShootResult.Missed => {println("Missed")}
         case ShootResult.HitShip => {println("Hitship")}
         case ShootResult.SunkShip => {println("Sunkship")}
-        case ShootResult.AlreadyFired => {}
-      }
+        case ShootResult.AlreadyFired => {println("AlreadyFired")}
+    }
+   game.calculateShot(username,x,y)
 
-      if(currentPlayer.equals(game.player1)){
+     if(currentPlayer.equals(game.player1)){
        currentPlayer = game.player2;
       }else{
         currentPlayer = game.player1;

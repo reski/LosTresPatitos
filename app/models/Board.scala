@@ -1,13 +1,9 @@
 package models
 
-import org.specs2.internal.scalaz.Value
-
-
-case class Board(tiles: Array[Array[Tile]]) {
+case class Board(var tiles: Array[Array[Tile]]){
 
 
   def shoot(x:Int, y:Int): ShootResult.Value = {
-
     val tile: Tile = tiles{x}{y}
     if (!tile.alreadyFired){
       tile.alreadyFired = true
@@ -18,7 +14,6 @@ case class Board(tiles: Array[Array[Tile]]) {
     }else{
       ShootResult.AlreadyFired
     }
-
   }
 }
 
@@ -46,18 +41,19 @@ object Board{
   }
 
   def emptyBoard() :Board ={
-   val board: Board = Board(Array.ofDim[Tile](10,10))
-   board.tiles.map(_.map(_= Tile.emptyTile()))
-   board
-    /* for (i <- 0 until 9) {
+   var board: Board = Board(Array.ofDim[Tile](10,10))
+   //board.tiles.map(array=> array.map(tile => tile =Tile.emptyTile()))
+    for (i <- 0 until 9) {
       for (j <- 0 until 9) {
         board.tiles{i}{j} = Tile.emptyTile();
       }
-    }*/
+    }
+   board
   }
-
-
 }
+
+
+
   /*def createBoard: List[List[Tile]] = {
     var lists: List[List[Tile]] = List[List[Tile]]()
 

@@ -22,7 +22,7 @@ class Game {
 
   }
 
-  def shoot(username: String, x: Int, y: Int) = {
+  def shoot(username: String, x: Int, y: Int):ShootResult.Value = {
     players{username}.board.shoot(x,y)
 
 
