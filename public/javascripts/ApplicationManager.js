@@ -32,6 +32,8 @@ function ApplicationManager()
 
         g_GameObjectManager.shutdownAll();
         this.strategySet = true;
+        var body = document.getElementById('body');
+        body.style.backgroundImage =  'url('+g_ResourceManager.wood.src+')';
         g_GameObjectManager.ocean.init();
         this.grid = new Grid().startUp(0, 20);
         this.playerGrid = new Grid().startUp(410, 20);
@@ -39,10 +41,8 @@ function ApplicationManager()
         if(def) this.level= new Level().startUpDefault();
         else this.level = new Level().startupLevel(this.canvasWidth, this.canvasHeight,ships);
 
-
-
-
     }
+
     this.openEnd = function(gameOutcome){
         this.cleanSlate();
         this.endScreen = new EndScreen().startupEndScreen(gameOutcome)

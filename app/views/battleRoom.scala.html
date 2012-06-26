@@ -94,8 +94,9 @@
     var autoPlay = false;
     var bot;
     var suggested;
+    var host = window.location.host;
     var WS = window['MozWebSocket'] ? MozWebSocket : WebSocket
-    var chatSocket = new WS("ws://localhost:9000@routes.Application.connect(username,welcomeText._3)");
+    var chatSocket = new WS("ws://"+host+"@routes.Application.connect(username,welcomeText._3)");
 
     $(function() {
 

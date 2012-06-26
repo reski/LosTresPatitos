@@ -175,7 +175,8 @@ function GameObjectManager()
                     {name: 'metal', src: '/assets/images/metal.png'},
                     {name: 'fire', src: '/assets/images/fire.png'},
                     {name: 'cannonBall', src: '/assets/images/cannonballsplash.png'},
-                    {name: 'ocean', src: '/assets/images/ocean2.jpg'}
+                    {name: 'ocean', src: '/assets/images/ocean2.jpg'},
+                    {name: 'wood', src: '/assets/images/wood.jpg'}
 
                 ]);
 
