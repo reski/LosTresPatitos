@@ -19,16 +19,16 @@ function Level()
       if(ship.rotation == 0){
         switch(ship.name){
             case "ship1good":
-                new VisualGameObject().startupVisualGameObject(ship.image, ((ship.x*multiplier)+adder+3),(ship.y*multiplier)+15,3);
+                new VisualGameObject().startupVisualGameObject(g_ResourceManager.ship1good, ((ship.x*multiplier)+adder+3),(ship.y*multiplier)+15,3);
                 break;
             case "ship2good":
-                new VisualGameObject().startupVisualGameObject(ship.image, ((ship.x*multiplier)+adder- 3),(ship.y*multiplier)+20,3);
+                new VisualGameObject().startupVisualGameObject(g_ResourceManager.ship2good, ((ship.x*multiplier)+adder- 3),(ship.y*multiplier)+20,3);
                 break;
             case "ship3good":
-                new VisualGameObject().startupVisualGameObject(ship.image, ((ship.x*multiplier)+adder),(ship.y*multiplier),3);
+                new VisualGameObject().startupVisualGameObject(g_ResourceManager.ship3good, ((ship.x*multiplier)+adder),(ship.y*multiplier),3);
                 break;
             case "ship4good":
-                new VisualGameObject().startupVisualGameObject(ship.image, ((ship.x*multiplier)+adder),(ship.y*multiplier)-20,3);
+                new VisualGameObject().startupVisualGameObject(g_ResourceManager.ship4good, ((ship.x*multiplier)+adder),(ship.y*multiplier)-20,3);
                 break;
 
         }

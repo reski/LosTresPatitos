@@ -124,7 +124,7 @@ function getChildrenPos(){
     var newShips =parsePositions(ships);
     if(validateStrategy(newShips)){
         sendStrategy(newShips);
-        g_ApplicationManager.startLevel(newShips,false);
+        g_ApplicationManager.startLevel(newShips);
         document.getElementById("popUpBack").style.display = "none";
         stop();
     } else {
@@ -145,11 +145,27 @@ function defaultStrategy(){
                 default : true
             }
         ));
-    g_ApplicationManager.startLevel(newShips,true);
-    document.getElementById("popUpBack").style.display = "none";
+
     //makes sure no alerts are left
     document.getElementById("alert").style.display = "none";
     document.getElementById("alert2").style.display = "none";
+
+}
+function receiveDefaultStrategy(ships){
+    var newShips = new Array();
+     for (var i =0 ; i<ships.length; i++){
+               var ship = ships[i].split(",")
+               var newShip = new Object();
+               newShip.name = ship[0];
+               newShip.x = ship[1];
+               newShip.y = ship[2];
+               if(ship[3] == "true")newShip.rotation = 90;
+               else  newShip.rotation = 0;
+               newShips.push(newShip)
+          }
+     g_ApplicationManager.startLevel(newShips);
+
+     document.getElementById("popUpBack").style.display = "none";
 
 }
 

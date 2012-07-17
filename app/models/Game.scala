@@ -6,25 +6,23 @@ import scala.Predef._
 
 class Game {
 
-
-
-  var currentPlayer = "";
-  var player1: String = "";
-  var player2: String = "";
+  var currentPlayer = ""
+  var player1: String = ""
+  var player2: String = ""
   var players = Map.empty[String, Player]
 
   def changeTurn(currentUser: String){
     if(currentPlayer.equals(player1)){
-      currentPlayer = player2;
+      currentPlayer = player2
     }else{
-      currentPlayer = player1;
+      currentPlayer = player1
     }
 
   }
 
   def addPlayer(username: String, out: PushEnumerator[JsValue])={
-    val player: Player = new Player();
-    player.out = out;
+    val player: Player = new Player()
+    player.out = out
     //player.board = Board.defaultBoard();
     players += (username -> player)
 
@@ -36,7 +34,9 @@ class Game {
   }
 
   def setDefaultBoard(username:String){
-    players(username).board = Board.defaultBoard()
+    val defBoard = Board.defaultBoard()
+    players(username).board = defBoard._1
+    players(username).out.push(defBoard._2)
     players(username).strategySet = true
     setCurrentPlayer(username)
   }

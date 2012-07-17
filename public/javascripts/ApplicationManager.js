@@ -27,7 +27,7 @@ function ApplicationManager()
         return this;
     }
 
-    this.startLevel = function(ships,def)
+    this.startLevel = function(ships)
     {
 
         g_GameObjectManager.shutdownAll();
@@ -38,8 +38,7 @@ function ApplicationManager()
         this.grid = new Grid().startUp(0, 20);
         this.playerGrid = new Grid().startUp(410, 20);
 
-        if(def) this.level= new Level().startUpDefault();
-        else this.level = new Level().startupLevel(this.canvasWidth, this.canvasHeight,ships);
+        this.level = new Level().startupLevel(this.canvasWidth, this.canvasHeight,ships);
 
     }
 

@@ -52,7 +52,7 @@ object Application extends Controller {
             GameController.games(gameId).informOponentEntered(username)
             //println("timer")
         }
-      }, 2000)
+      }, 3000)
       new Timer().schedule(new TimerTask(){
         def run(){
           out.push(JsObject(Seq("action" ->JsString("timerFinish"))))

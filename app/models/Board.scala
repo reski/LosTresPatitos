@@ -1,16 +1,25 @@
 package models
 
-import play.api.libs.json.JsValue
+import play.api.libs.json.{JsArray, JsString, JsObject, JsValue}
+import util.Random
 
 
 case class Board(var tiles: Array[Array[Tile]]) {
+  var boatsLeft:Int = 0
+  var shipPos: List[String] = List.empty
+  var posTaken : List[String] = List.empty
 
-  def addShip(boat: JsValue){
+  def parseShip(boat: JsValue){
     val x: Int = (boat \ "x").as[Int]
     val y: Int = (boat \ "y").as[Int]
     val rot: Boolean = (boat \ "rot").as[Boolean]
+    val name: String = (boat \ "name").as[String]
+    addShip(name,x,y,rot)
+  }
 
-    (boat \ "name").as[String] match{
+
+  def addShip(name:String,x:Int,y:Int,rot:Boolean) {
+    name match{
       case "ship1good" =>
         val ship:Ship =Ship.smallShip()
         this.tiles(x)(y) = Tile(Some(ship))
@@ -48,12 +57,72 @@ case class Board(var tiles: Array[Array[Tile]]) {
 
         }
     }
+
     this.boatsLeft += 1
+    this.shipPos = shipPos :+ (name+","+x+","+y+","+rot)
+  }
+
+  def addRandomShip(name :String){
+    val random = new Random()
+    var added = false
+    var x:Int = 0
+    var y:Int = 0
+    var rot:Boolean = false
+
+    while (!added){
+      x = random.nextInt(9)
+      y = random.nextInt(9)
+      rot = random.nextBoolean()
+
+      if(!posTaken.contains(x+","+y)){
+          name match{
+            case "ship1good" =>
+               added= true
+
+            case "ship2good" =>
+              if(rot && x<9 && !posTaken.contains((x+1)+","+y)){
+                posTaken = posTaken:+((x+1)+","+y)
+                added= true
+              }else if(!rot && y<9 && !posTaken.contains(x+","+(y+1))){
+                posTaken = posTaken:+(x+","+(y+1))
+                added = true
+              }
+
+            case "ship3good" =>
+
+              if(rot && y<8 && !posTaken.contains((x)+","+(y+1)) && !posTaken.contains((x)+","+(y+2))){
+                posTaken = posTaken:+((x)+","+(y+1))
+                posTaken = posTaken:+((x)+","+(y+2))
+                added = true
+              }
+              else if (!rot && x<8 && !posTaken.contains((x+1)+","+(y)) && !posTaken.contains((x+2)+","+(y))) {
+                posTaken = posTaken:+((x+1)+","+(y))
+                posTaken = posTaken:+((x+2)+","+(y))
+                added = true
+              }
+
+            case "ship4good" =>
+              if(rot && y<8 && x<9 && !posTaken.contains((x)+","+(y+1)) && !posTaken.contains((x)+","+(y+2)) && !posTaken.contains((x+1)+","+(y+2))){
+                posTaken = posTaken:+((x)+","+(y+1))
+                posTaken = posTaken:+((x)+","+(y+2))
+                posTaken = posTaken:+((x+1)+","+(y+2))
+                added = true
+              }else if (!rot && x<8 && y>0 && !posTaken.contains((x+1)+","+(y)) && !posTaken.contains((x+2)+","+(y)) && !posTaken.contains((x+2)+","+(y-1))){
+                posTaken = posTaken:+((x+1)+","+(y))
+                posTaken = posTaken:+((x+2)+","+(y))
+                posTaken =  posTaken:+((x+2)+","+(y-1))
+                added = true
+              }
+          }
+        }
+    }
+    posTaken = posTaken:+(x+","+y)
+    addShip(name,x,y,rot)
+
+
   }
 
 
-
-  var boatsLeft:Int = 0
 
   def shoot(x: Int, y: Int): ShootResult.Value = {
     val tile: Tile = tiles(x)(y)
@@ -71,36 +140,21 @@ case class Board(var tiles: Array[Array[Tile]]) {
 object Board {
   def fillBoard(array: Array[JsValue]): Board ={
     var board: Board = Board.emptyBoard()
-    array.foreach(boat => board.addShip(boat))
+    array.foreach(boat => board.parseShip(boat))
     board
   }
 
 
-  def defaultBoard(): Board = {
-
-    val ship1: Ship = Ship.smallShip()
-    val ship1b: Ship = Ship.smallShip()
-    val ship2: Ship = Ship.mediumShip()
-    val ship3: Ship = Ship.largeShip()
-    val ship3b: Ship = Ship.largeShip()
-    val ship4: Ship = Ship.xLargeShip()
+  def defaultBoard():(Board,JsValue) = {
     var board: Board = Board.emptyBoard()
-    board.tiles(0)(8) = Tile(Some(ship1))
-    board.tiles(1)(5) = Tile(Some(ship1b))
-    board.tiles(3)(4) = Tile(Some(ship2))
-    board.tiles(3)(5) = Tile(Some(ship2))
-    board.tiles(0)(0) = Tile(Some(ship3b))
-    board.tiles(1)(0) = Tile(Some(ship3b))
-    board.tiles(2)(0) = Tile(Some(ship3b))
-    board.tiles(2)(8) = Tile(Some(ship3))
-    board.tiles(3)(8) = Tile(Some(ship3))
-    board.tiles(4)(8) = Tile(Some(ship3))
-    board.tiles(7)(7) = Tile(Some(ship4))
-    board.tiles(8)(7) = Tile(Some(ship4))
-    board.tiles(9)(7) = Tile(Some(ship4))
-    board.tiles(9)(6) = Tile(Some(ship4))
-    board.boatsLeft= 6
-    board
+    var ships = Array("ship4good","ship3good","ship3good","ship2good","ship1good","ship1good")
+    ships.foreach(boat => board.addRandomShip(boat))
+
+    (board,JsObject(Seq("action" ->JsString("defaultStrategy"),
+                        "ships" -> JsArray(board.shipPos.map(JsString))
+                        )
+                     ))
+
   }
 
   def emptyBoard(): Board = {

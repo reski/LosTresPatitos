@@ -4,7 +4,7 @@ import play.api.libs.json.JsValue
 
 case class Ship(id: Long, size: Int) {
 
-  var hitPoints: Int = size;
+  var hitPoints: Int = size
 
   def hit(board: Board) : ShootResult.Value = {
     hitPoints-=1

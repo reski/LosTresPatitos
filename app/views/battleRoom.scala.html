@@ -188,21 +188,30 @@
     }
 
     if(data.action){
-        if(data.action == "timer"){
-        startTimer();
-        }else{
+      switch(data.action){
+
+        case "defaultStrategy":
+             receiveDefaultStrategy(data.ships)
+              break;
+
+        case "timer":
+            startTimer();
+            break;
+        case "timerFinish":
         if(g_ApplicationManager.strategySet == false)defaultStrategy();
-        }
-       }
+        break;
+
     }
 
+    }
+    }
 
     var handleReturnKey = function(e) {
     if(e.charCode == 13 || e.keyCode == 13) {
     e.preventDefault();
     sendMessage();
     }
-    }    ;
+    }
 
     $("#talk").keypress(handleReturnKey)
 
@@ -236,8 +245,6 @@
         }
     }
 
-
-
 </script>
 <script src="@routes.Assets.at("javascripts/battleship-bot.js")" type="text/javascript"></script>
 <script src="@routes.Assets.at("javascripts/data.js")" type="text/javascript"></script>
@@ -258,8 +265,6 @@
 <script src="@routes.Assets.at("javascripts/CannonBall.js")" type="text/javascript"></script>
 <script src="@routes.Assets.at("javascripts/Ocean.js")" type="text/javascript"></script>
 <script src="@routes.Assets.at("javascripts/Grid.js")" type="text/javascript"></script>
-
-
 
 
 }
